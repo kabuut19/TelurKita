@@ -2,43 +2,167 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
 }
 
 body{
-    font-family:Arial, sans-serif;
-    background:#f4f4f4;
-    color:#333;
+    background:#f5f7fb;
 }
 
-header{
-    background:#ff9800;
-    color:white;
-    text-align:center;
+/* ===================== */
+/* SIDEBAR */
+/* ===================== */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:250px;
+    height:100%;
+    background:#ffffff;
+    box-shadow:0 0 20px rgba(0,0,0,.08);
     padding:25px;
 }
 
-.menu{
-    padding:20px;
+.logo{
+    font-size:26px;
+    font-weight:700;
+    color:#ff8c00;
+    margin-bottom:40px;
 }
 
-.card{
-    background:white;
-    border-radius:15px;
-    padding:20px;
-    margin-bottom:15px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+.logo span{
+    color:#222;
 }
 
-.card h2{
-    margin-bottom:15px;
+.sidebar ul{
+    list-style:none;
 }
 
-button{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:10px;
-    background:#ff9800;
-    color:white;
+.sidebar ul li{
+    padding:14px 18px;
+    margin-bottom:12px;
+    border-radius:12px;
+    cursor:pointer;
+    transition:.3s;
+    color:#555;
     font-size:16px;
+}
+
+.sidebar ul li i{
+    margin-right:10px;
+}
+
+.sidebar ul li:hover{
+    background:#fff4e6;
+    color:#ff8c00;
+}
+
+.sidebar .active{
+    background:#ff8c00;
+    color:#fff;
+}
+
+/* ===================== */
+/* MAIN */
+/* ===================== */
+
+.main{
+    margin-left:270px;
+    padding:30px;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.topbar h3{
+    font-weight:700;
+}
+
+.user{
+    background:#fff;
+    padding:10px 18px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+/* ===================== */
+/* CARD */
+/* ===================== */
+
+.card-box{
+    background:#fff;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.card-box:hover{
+    transform:translateY(-5px);
+}
+
+.card-box h5{
+    color:#777;
+    font-size:15px;
+    margin-bottom:15px;
+}
+
+.card-box h2{
+    color:#ff8c00;
+    font-size:32px;
+    font-weight:700;
+}
+
+/* ===================== */
+/* QUICK ACTION */
+/* ===================== */
+
+.quick-action{
+    margin-top:40px;
+    background:#fff;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.quick-action h4{
+    margin-bottom:20px;
+    font-weight:700;
+}
+
+.quick-action button{
+    margin-right:10px;
+    margin-bottom:10px;
+    border-radius:12px;
+    padding:10px 18px;
+}
+
+/* ===================== */
+/* MOBILE */
+/* ===================== */
+
+@media(max-width:768px){
+
+.sidebar{
+    width:100%;
+    height:auto;
+    position:relative;
+}
+
+.main{
+    margin-left:0;
+    padding:20px;
+}
+
+.topbar{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:15px;
+}
+
 }
