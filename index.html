@@ -2,170 +2,381 @@
 <html lang="id">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TelurKita</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<meta charset="UTF-8">
 
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+<title>TelurKita Premium V2</title>
 
-    <link rel="stylesheet" href="style.css">
+<!-- Bootstrap -->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Icons -->
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<!-- Font -->
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-<div class="sidebar">
+<div class="wrapper">
 
-    <div class="logo">
-        🥚 <span>TelurKita</span>
-    </div>
+<!-- ========================= -->
 
-    <ul>
+<!-- SIDEBAR -->
 
-        <li class="active">
-            <i class="bi bi-grid-fill"></i>
-            <span>Dashboard</span>
-        </li>
+<!-- ========================= -->
 
-        <li onclick="location.href='pages/stok.html'">
-            <i class="bi bi-box-seam"></i>
-            <span>Stok</span>
-        </li>
+<aside class="sidebar">
 
-        <li onclick="location.href='pages/penjualan.html'">
-            <i class="bi bi-cart-fill"></i>
-            <span>Penjualan</span>
-        </li>
+<div class="logo">
 
-        <li onclick="location.href='pages/supplier.html'">
-            <i class="bi bi-truck"></i>
-            <span>Supplier</span>
-        </li>
+🥚
 
-        <li onclick="location.href='pages/pengeluaran.html'">
-            <i class="bi bi-wallet2"></i>
-            <span>Pengeluaran</span>
-        </li>
-
-        <li onclick="location.href='pages/piutang.html'">
-            <i class="bi bi-cash-stack"></i>
-            <span>Piutang</span>
-        </li>
-
-        <li onclick="location.href='pages/laporan.html'">
-            <i class="bi bi-bar-chart-line-fill"></i>
-            <span>Laporan</span>
-        </li>
-
-        <li onclick="location.href='pages/pengaturan.html'">
-            <i class="bi bi-gear-fill"></i>
-            <span>Pengaturan</span>
-        </li>
-
-    </ul>
+<span>TelurKita</span>
 
 </div>
 
-<div class="main">
+<nav>
 
-<div class="topbar">
+<ul>
 
-<h3>Dashboard</h3>
+<li class="active">
 
-<div class="user">
+<a href="index.html">
+
+<i class="bi bi-grid-fill"></i>
+
+<span>Dashboard</span>
+
+</a>
+
+</li>
+
+<li>
+
+<a href="pages/stok.html">
+
+<i class="bi bi-box-seam"></i>
+
+<span>Stok</span>
+
+</a>
+
+</li>
+
+<li>
+
+<a href="pages/penjualan.html">
+
+<i class="bi bi-cart-fill"></i>
+
+<span>Penjualan</span>
+
+</a>
+
+</li>
+
+<li>
+
+<a href="pages/supplier.html">
+
+<i class="bi bi-truck"></i>
+
+<span>Supplier</span>
+
+</a>
+
+</li>
+
+<li>
+
+<a href="pages/pengeluaran.html">
+
+<i class="bi bi-wallet2"></i>
+
+<span>Pengeluaran</span>
+
+</a>
+
+</li>
+
+<li>
+
+<a href="pages/piutang.html">
+
+<i class="bi bi-cash-stack"></i>
+
+<span>Piutang</span>
+
+</a>
+
+</li>
+
+<li>
+
+<a href="pages/laporan.html">
+
+<i class="bi bi-bar-chart-line-fill"></i>
+
+<span>Laporan</span>
+
+</a>
+
+</li>
+
+<li>
+
+<a href="pages/pengaturan.html">
+
+<i class="bi bi-gear-fill"></i>
+
+<span>Pengaturan</span>
+
+</a>
+
+</li>
+
+</ul>
+
+</nav>
+
+</aside>
+
+<!-- ========================= -->
+
+<!-- CONTENT -->
+
+<!-- ========================= -->
+
+<main class="content">
+
+<header class="topbar">
+
+<div class="left">
+
+<button id="menuToggle">
+
+<i class="bi bi-list"></i>
+
+</button>
+
+<h2>Dashboard</h2>
+
+</div>
+
+<div class="right">
+
+<div class="search">
+
+<i class="bi bi-search"></i>
+
+<input
+type="text"
+placeholder="Cari...">
+
+</div>
+
+<div class="profile">
 
 <i class="bi bi-person-circle"></i>
 
-Admin
+<span>Admin</span>
 
 </div>
 
 </div>
+
+</header>
+
+<section class="dashboard">
+    <!-- ========================= -->
+<!-- CARD STATISTIK -->
+<!-- ========================= -->
 
 <div class="row g-4">
 
-<div class="col-lg-3 col-md-6">
+    <div class="col-xl-3 col-md-6">
 
-<div class="card-box">
+        <div class="stat-card orange">
 
-<p>Total Stok</p>
+            <div>
 
-<h2>125 Rak</h2>
+                <h6>Total Stok</h6>
+
+                <h2 id="totalStok">0 Rak</h2>
+
+                <small>Total stok tersedia</small>
+
+            </div>
+
+            <div class="icon">
+
+                <i class="bi bi-box-seam-fill"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+
+        <div class="stat-card green">
+
+            <div>
+
+                <h6>Penjualan Hari Ini</h6>
+
+                <h2 id="penjualanHariIni">Rp0</h2>
+
+                <small>Omzet hari ini</small>
+
+            </div>
+
+            <div class="icon">
+
+                <i class="bi bi-cart-check-fill"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+
+        <div class="stat-card red">
+
+            <div>
+
+                <h6>Pengeluaran</h6>
+
+                <h2 id="pengeluaranHariIni">Rp0</h2>
+
+                <small>Total pengeluaran</small>
+
+            </div>
+
+            <div class="icon">
+
+                <i class="bi bi-wallet-fill"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+
+        <div class="stat-card blue">
+
+            <div>
+
+                <h6>Piutang</h6>
+
+                <h2 id="piutangTotal">Rp0</h2>
+
+                <small>Belum dibayar</small>
+
+            </div>
+
+            <div class="icon">
+
+                <i class="bi bi-cash-stack"></i>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 
-</div>
+<!-- ========================= -->
+<!-- QUICK MENU -->
+<!-- ========================= -->
 
-<div class="col-lg-3 col-md-6">
-
-<div class="card-box">
-
-<p>Penjualan Hari Ini</p>
-
-<h2>Rp0</h2>
-
-</div>
-
-</div>
-
-<div class="col-lg-3 col-md-6">
-
-<div class="card-box">
-
-<p>Pengeluaran</p>
-
-<h2>Rp0</h2>
-
-</div>
-
-</div>
-
-<div class="col-lg-3 col-md-6">
-
-<div class="card-box">
-
-<p>Piutang</p>
-
-<h2>Rp0</h2>
-
-</div>
-
-</div>
-
-</div>
 <div class="row mt-4">
 
     <div class="col-lg-8">
 
-        <div class="card-box">
+        <div class="card dashboard-card">
 
-            <h4>⚡ Aksi Cepat</h4>
+            <div class="card-header">
 
-            <div class="d-flex flex-wrap gap-3 mt-3">
+                <h5>
 
-                <button class="btn btn-warning" onclick="location.href='pages/stok.html'">
-                    <i class="bi bi-plus-circle"></i> Stok Masuk
-                </button>
+                    ⚡ Menu Cepat
 
-                <button class="btn btn-success" onclick="location.href='pages/penjualan.html'">
-                    <i class="bi bi-cart-plus"></i> Penjualan
-                </button>
+                </h5>
 
-                <button class="btn btn-danger" onclick="location.href='pages/pengeluaran.html'">
-                    <i class="bi bi-wallet2"></i> Pengeluaran
-                </button>
+            </div>
 
-                <button class="btn btn-primary" onclick="location.href='pages/laporan.html'">
-                    <i class="bi bi-bar-chart"></i> Laporan
-                </button>
+            <div class="card-body">
+
+                <div class="quick-menu">
+
+                    <a href="pages/stok.html" class="quick-item">
+
+                        <i class="bi bi-box-seam-fill"></i>
+
+                        <span>Stok</span>
+
+                    </a>
+
+                    <a href="pages/penjualan.html" class="quick-item">
+
+                        <i class="bi bi-cart-fill"></i>
+
+                        <span>Penjualan</span>
+
+                    </a>
+
+                    <a href="pages/supplier.html" class="quick-item">
+
+                        <i class="bi bi-truck"></i>
+
+                        <span>Supplier</span>
+
+                    </a>
+
+                    <a href="pages/pengeluaran.html" class="quick-item">
+
+                        <i class="bi bi-wallet2"></i>
+
+                        <span>Pengeluaran</span>
+
+                    </a>
+
+                    <a href="pages/piutang.html" class="quick-item">
+
+                        <i class="bi bi-cash-stack"></i>
+
+                        <span>Piutang</span>
+
+                    </a>
+
+                    <a href="pages/laporan.html" class="quick-item">
+
+                        <i class="bi bi-graph-up-arrow"></i>
+
+                        <span>Laporan</span>
+
+                    </a>
+
+                </div>
 
             </div>
 
@@ -175,21 +386,98 @@ Admin
 
     <div class="col-lg-4">
 
-        <div class="card-box">
+        <div class="card dashboard-card">
 
-            <h4>📌 Ringkasan</h4>
+            <div class="card-header">
 
-            <hr>
+                <h5>
 
-            <p>📦 Stok : <b>125 Rak</b></p>
+                    📋 Ringkasan
 
-            <p>💰 Penjualan : <b>Rp0</b></p>
+                </h5>
 
-            <p>💸 Pengeluaran : <b>Rp0</b></p>
+            </div>
 
-            <p>📋 Piutang : <b>Rp0</b></p>
+            <div class="card-body">
 
-            <p>📈 Laba : <b>Rp0</b></p>
+                <p>📦 Total Rak : <strong id="ringkasanRak">0</strong></p>
+
+                <p>💰 Penjualan : <strong id="ringkasanJual">Rp0</strong></p>
+
+                <p>💸 Pengeluaran : <strong id="ringkasanKeluar">Rp0</strong></p>
+
+                <p>📋 Piutang : <strong id="ringkasanPiutang">Rp0</strong></p>
+
+                <p>📈 Laba Bersih : <strong id="ringkasanLaba">Rp0</strong></p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ========================= -->
+<!-- GRAFIK & TRANSAKSI -->
+<!-- ========================= -->
+
+<div class="row mt-4">
+
+    <div class="col-lg-8">
+
+        <div class="card dashboard-card">
+
+            <div class="card-header d-flex justify-content-between align-items-center">
+
+                <h5>📈 Grafik Penjualan</h5>
+
+                <select class="form-select w-auto">
+
+                    <option>7 Hari</option>
+
+                    <option>30 Hari</option>
+
+                    <option>12 Bulan</option>
+
+                </select>
+
+            </div>
+
+            <div class="card-body">
+
+                <canvas id="salesChart" height="120"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-4">
+
+        <div class="card dashboard-card">
+
+            <div class="card-header">
+
+                <h5>🔔 Aktivitas Hari Ini</h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <ul class="activity-list">
+
+                    <li>📦 Belum ada stok masuk</li>
+
+                    <li>🛒 Belum ada penjualan</li>
+
+                    <li>💸 Belum ada pengeluaran</li>
+
+                    <li>📋 Tidak ada piutang jatuh tempo</li>
+
+                </ul>
+
+            </div>
 
         </div>
 
@@ -197,7 +485,79 @@ Admin
 
 </div>
 
+<!-- ========================= -->
+<!-- TRANSAKSI TERAKHIR -->
+<!-- ========================= -->
+
+<div class="card dashboard-card mt-4">
+
+    <div class="card-header d-flex justify-content-between align-items-center">
+
+        <h5>📋 Transaksi Terakhir</h5>
+
+        <a href="pages/laporan.html" class="btn btn-warning btn-sm">
+
+            Lihat Semua
+
+        </a>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Tanggal</th>
+
+                        <th>Jenis</th>
+
+                        <th>Keterangan</th>
+
+                        <th>Total</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td colspan="5" class="text-center text-muted">
+
+                            Belum ada transaksi
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
 </div>
+
+</section>
+
+</main>
+
+</div>
+
+<!-- Chart JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script src="script.js"></script>
 
