@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Penjualan | TelurKita Premium V2</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<link rel="stylesheet" href="../style.css">
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+<div class="logo">
+
+🥚 <span>TelurKita</span>
+
+</div>
+
+<nav>
+
+<ul>
+
+<li>
+
+<a href="../index.html">
+
+<i class="bi bi-grid-fill"></i>
+
+Dashboard
+
+</a>
+
+</li>
+
+<li>
+
+<a href="stok.html">
+
+<i class="bi bi-box-seam-fill"></i>
+
+Stok
+
+</a>
+
+</li>
+
+<li class="active">
+
+<a href="penjualan.html">
+
+<i class="bi bi-cart-fill"></i>
+
+Penjualan
+
+</a>
+
+</li>
+
+<li>
+
+<a href="supplier.html">
+
+<i class="bi bi-truck"></i>
+
+Supplier
+
+</a>
+
+</li>
+
+<li>
+
+<a href="pengeluaran.html">
+
+<i class="bi bi-wallet2"></i>
+
+Pengeluaran
+
+</a>
+
+</li>
+
+<li>
+
+<a href="piutang.html">
+
+<i class="bi bi-cash-stack"></i>
+
+Piutang
+
+</a>
+
+</li>
+
+<li>
+
+<a href="laporan.html">
+
+<i class="bi bi-bar-chart-fill"></i>
+
+Laporan
+
+</a>
+
+</li>
+
+<li>
+
+<a href="pengaturan.html">
+
+<i class="bi bi-gear-fill"></i>
+
+Pengaturan
+
+</a>
+
+</li>
+
+</ul>
+
+</nav>
+
+</aside>
+
+<!-- CONTENT -->
+
+<main class="content">
+
+<header class="topbar">
+
+<div class="left">
+
+<button id="menuToggle">
+
+<i class="bi bi-list"></i>
+
+</button>
+
+<div>
+
+<h2>Penjualan</h2>
+
+<small id="tanggalJam"></small>
+
+</div>
+
+</div>
+
+<div class="right">
+
+<div class="search">
+
+<i class="bi bi-search"></i>
+
+<input
+type="text"
+id="searchPenjualan"
+placeholder="Cari pelanggan...">
+
+</div>
+
+<button
+id="darkMode"
+class="btn btn-light">
+
+<i class="bi bi-moon-stars-fill"></i>
+
+</button>
+
+<div class="profile">
+
+<i class="bi bi-person-circle"></i>
+
+<span>Admin</span>
+
+</div>
+
+</div>
+
+</header>
+
+<section class="dashboard">
+
+<div class="row g-4">
+
+<div class="col-lg-3">
+
+<div class="stat-card orange">
+
+<div>
+
+<h6>Total Penjualan</h6>
+
+<h2 id="totalJual">
+
+Rp0
+
+</h2>
+
+</div>
+
+<div class="icon">
+
+<i class="bi bi-cart-fill"></i>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-3">
+
+<div class="stat-card green">
+
+<div>
+
+<h6>Total Rak Terjual</h6>
+
+<h2 id="rakTerjual">
+
+0
+
+</h2>
+
+</div>
+
+<div class="icon">
+
+<i class="bi bi-box-seam"></i>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-3">
+
+<div class="stat-card blue">
+
+<div>
+
+<h6>Total Laba</h6>
+
+<h2 id="totalLaba">
+
+Rp0
+
+</h2>
+
+</div>
+
+<div class="icon">
+
+<i class="bi bi-graph-up-arrow"></i>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-3">
+
+<div class="stat-card red">
+
+<div>
+
+<h6>Piutang</h6>
+
+<h2 id="piutangJual">
+
+Rp0
+
+</h2>
+
+</div>
+
+<div class="icon">
+
+<i class="bi bi-cash-stack"></i>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<!-- ========================= -->
+<!-- FORM PENJUALAN -->
+<!-- ========================= -->
+
+<div class="card dashboard-card mt-4">
+
+    <div class="card-header">
+
+        <h5>🛒 Input Transaksi Penjualan</h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <form id="formPenjualan">
+
+            <div class="row">
+
+                <div class="col-md-3 mb-3">
+
+                    <label class="form-label">Tanggal</label>
+
+                    <input type="date"
+                           id="tanggal"
+                           class="form-control"
+                           required>
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <label class="form-label">Nama Pelanggan</label>
+
+                    <input type="text"
+                           id="pelanggan"
+                           class="form-control"
+                           placeholder="Nama pelanggan"
+                           required>
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <label class="form-label">Pilih Rak</label>
+
+                    <select id="rak"
+                            class="form-select"
+                            required>
+
+                        <option value="">
+                            -- Pilih Rak --
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <label class="form-label">Supplier</label>
+
+                    <input type="text"
+                           id="supplier"
+                           class="form-control"
+                           readonly>
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <label class="form-label">Jumlah Rak Terjual</label>
+
+                    <input type="number"
+                           id="jumlahRak"
+                           class="form-control"
+                           min="1"
+                           required>
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <label class="form-label">Harga Jual / Rak</label>
+
+                    <input type="number"
+                           id="hargaJual"
+                           class="form-control"
+                           placeholder="Contoh : 560000"
+                           required>
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <label class="form-label">Metode Pembayaran</label>
+
+                    <select id="metode"
+                            class="form-select"
+                            required>
+
+                        <option value="Tunai">
+                            Tunai
+                        </option>
+
+                        <option value="Piutang">
+                            Piutang
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <label class="form-label">Keterangan</label>
+
+                    <input type="text"
+                           id="keterangan"
+                           class="form-control"
+                           placeholder="Opsional">
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="row">
+
+                <div class="col-md-4">
+
+                    <h6>Total Penjualan</h6>
+
+                    <h3 id="previewTotal">
+                        Rp0
+                    </h3>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <h6>Estimasi Laba</h6>
+
+                    <h3 id="previewLaba">
+                        Rp0
+                    </h3>
+
+                </div>
+
+                <div class="col-md-4 text-end">
+
+                    <button type="submit"
+                            class="btn btn-warning">
+
+                        <i class="bi bi-save"></i>
+
+                        Simpan Transaksi
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- RINGKASAN -->
+<!-- ========================= -->
+
+<div class="row mt-4">
+
+    <div class="col-lg-6">
+
+        <div class="card dashboard-card">
+
+            <div class="card-header">
+
+                <h5>📊 Ringkasan Hari Ini</h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <p>Total Penjualan
+                    <strong id="ringPenjualan">
+                        Rp0
+                    </strong>
+                </p>
+
+                <p>Total Rak Terjual
+                    <strong id="ringRakJual">
+                        0
+                    </strong>
+                </p>
+
+                <p>Total Laba
+                    <strong id="ringLaba">
+                        Rp0
+                    </strong>
+                </p>
+
+                <p>Total Piutang
+                    <strong id="ringPiutang">
+                        Rp0
+                    </strong>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-6">
+
+        <div class="card dashboard-card">
+
+            <div class="card-header">
+
+                <h5>📌 Informasi</h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <ul class="activity-list">
+
+                    <li>📦 Pilih rak yang tersedia.</li>
+
+                    <li>💰 Harga jual diisi saat transaksi.</li>
+
+                    <li>📉 Stok akan berkurang otomatis setelah transaksi.</li>
+
+                    <li>💳 Jika memilih Piutang, transaksi masuk ke menu Piutang.</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ========================= -->
+<!-- TABEL PENJUALAN -->
+<!-- ========================= -->
+
+<div class="card dashboard-card mt-4">
+
+    <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+
+        <h5>📋 Riwayat Penjualan</h5>
+
+        <div>
+
+            <button class="btn btn-success btn-sm" onclick="exportPenjualan()">
+                <i class="bi bi-download"></i>
+                Export
+            </button>
+
+            <button class="btn btn-danger btn-sm" onclick="resetPenjualan()">
+                <i class="bi bi-trash"></i>
+                Hapus Semua
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle">
+
+                <thead>
+
+                    <tr>
+
+                        <th>No</th>
+
+                        <th>Tanggal</th>
+
+                        <th>Pelanggan</th>
+
+                        <th>Supplier</th>
+
+                        <th>Rak</th>
+
+                        <th>Qty</th>
+
+                        <th>Harga Jual</th>
+
+                        <th>Total</th>
+
+                        <th>Metode</th>
+
+                        <th>Aksi</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="dataPenjualan">
+
+                    <tr>
+
+                        <td colspan="10" class="text-center text-muted">
+
+                            Belum ada transaksi penjualan
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
+
+<footer class="footer">
+
+    <p>
+
+        © 2026 <strong>TelurKita Premium V2</strong><br>
+
+        Sistem Manajemen Penjualan Telur
+
+    </p>
+
+</footer>
+
+</section>
+
+</main>
+
+</div>
+
+<!-- Bootstrap JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Chart JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Script Utama -->
+
+<script src="../script.js"></script>
+
+<!-- Script Penjualan -->
+
+<script src="../js/penjualan.js"></script>
+
+</body>
+
+</html>
