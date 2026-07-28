@@ -1,437 +1,745 @@
-/*====================================
-  TELURKITA PREMIUM V2
-  STOK.JS
-====================================*/
+/*==================================================
+    TELURKITA PREMIUM V3
+    stok.js
+==================================================*/
 
-let dataStok = JSON.parse(localStorage.getItem("dataStok")) || [];
+/*=========================================
+    DATA STOK
+=========================================*/
 
-const form = document.getElementById("formStok");
-const tbody = document.getElementById("dataStok");
-const search = document.getElementById("searchStok");
+let stokData = getStok();
 
-let editIndex = -1;
+let supplierData = getSupplier();
 
-/*====================================
-FORMAT RUPIAH
-====================================*/
+/*=========================================
+    ELEMEN
+=========================================*/
 
-function rupiah(angka){
+const stokTable = document.getElementById("stokTable");
 
-    return "Rp " + Number(angka).toLocaleString("id-ID");
+const btnSimpanStok = document.getElementById("btnSimpanStok");
 
-}
+const cariStok = document.getElementById("cariStok");
 
-/*====================================
-SIMPAN LOCAL STORAGE
-====================================*/
+/*=========================================
+    INPUT
+=========================================*/
 
-function simpanData(){
+const stokId = document.getElementById("stokId");
 
-    localStorage.setItem(
-        "dataStok",
-        JSON.stringify(dataStok)
-    );
+const supplierStok = document.getElementById("supplierStok");
 
-}
+const jumlahRak = document.getElementById("jumlahRak");
 
-/*====================================
-TOTAL
-====================================*/
+const hargaBeli = document.getElementById("hargaBeli");
 
-function hitungTotal(){
+const tanggalMasuk = document.getElementById("tanggalMasuk");
 
-    let totalRak=0;
-    let totalButir=0;
-    let totalNilai=0;
+const keteranganStok = document.getElementById("keteranganStok");
 
-    dataStok.forEach(item=>{
+/*=========================================
+    MODAL
+=========================================*/
 
-        totalRak+=Number(item.rak);
+const modalStok = new bootstrap.Modal(
 
-        totalButir+=Number(item.butir);
+    document.getElementById("modalStok")
 
-        totalNilai+=Number(item.total);
+);
 
-    });
+/*=========================================
+    LOAD AWAL
+=========================================*/
 
-    document.getElementById("totalRak").innerHTML=totalRak;
+loadDropdownSupplier();
 
-    document.getElementById("nilaiStok").innerHTML=rupiah(totalNilai);
+loadStok();
 
-    document.getElementById("jumlahSupplier").innerHTML=dataStok.length;
+loadStatistik();
 
-    document.getElementById("ringRak").innerHTML=totalRak;
+/*=========================================
+    EVENT
+=========================================*/
 
-    document.getElementById("ringButir").innerHTML=totalButir;
+btnSimpanStok.addEventListener(
 
-    document.getElementById("ringNilai").innerHTML=rupiah(totalNilai);
+    "click",
 
-    document.getElementById("ringSupplier").innerHTML=dataStok.length;
+    simpanStok
 
-}
+);
 
-/*====================================
-TAMPIL DATA
-====================================*/
+if (cariStok) {
 
-function tampilData(){
+    cariStok.addEventListener("keyup", function () {
 
-    tbody.innerHTML="";
-
-    if(dataStok.length===0){
-
-        tbody.innerHTML=`
-        <tr>
-            <td colspan="9" class="text-center">
-                Belum ada data stok
-            </td>
-        </tr>
-        `;
-
-        hitungTotal();
-
-        return;
-
-    }
-
-    dataStok.forEach((item,index)=>{
-
-        tbody.innerHTML+=`
-
-        <tr>
-
-        <td>${index+1}</td>
-
-        <td>${item.tanggal}</td>
-
-        <td>${item.supplier}</td>
-
-        <td>${item.rak}</td>
-
-        <td>${item.butir}</td>
-
-        <td>${rupiah(item.harga)}</td>
-
-        <td>${rupiah(item.total)}</td>
-
-        <td>${item.keterangan}</td>
-
-        <td>
-
-<button
-class="btn btn-warning btn-sm"
-onclick="editData(${index})">
-
-<i class="bi bi-pencil"></i>
-
-</button>
-
-<button
-class="btn btn-danger btn-sm"
-onclick="hapusData(${index})">
-
-<i class="bi bi-trash"></i>
-
-</button>
-
-        </td>
-
-        </tr>
-
-        `;
+        loadStok(this.value);
 
     });
 
-    hitungTotal();
-
 }
 
-tampilData();
-/*====================================
-SIMPAN DATA
-====================================*/
+/*=========================================
+    TANGGAL HARI INI
+=========================================*/
 
-form.addEventListener("submit", function(e){
+if (tanggalMasuk) {
 
-    e.preventDefault();
+    tanggalMasuk.value = new Date()
 
-    const tanggal = document.getElementById("tanggal").value;
+        .toISOString()
 
-    const supplier = document.getElementById("supplier").value;
-
-    const rak = Number(document.getElementById("rak").value);
-
-    const butir = Number(document.getElementById("butir").value);
-
-    const harga = Number(document.getElementById("harga").value);
-
-    const keterangan = document.getElementById("keterangan").value;
-
-    const total = rak * harga;
-
-    const data = {
-
-        tanggal,
-        supplier,
-        rak,
-        butir,
-        harga,
-        total,
-        keterangan
-
-    };
-
-    if(editIndex === -1){
-
-        dataStok.push(data);
-
-        showToast("✅ Data stok berhasil ditambahkan");
-
-    }else{
-
-        dataStok[editIndex] = data;
-
-        showToast("✏️ Data stok berhasil diperbarui");
-
-        editIndex = -1;
-
-    }
-
-    simpanData();
-
-    tampilData();
-
-    form.reset();
-
-});
-
-/*====================================
-EDIT DATA
-====================================*/
-
-function editData(index){
-
-    const item = dataStok[index];
-
-    document.getElementById("tanggal").value = item.tanggal;
-
-    document.getElementById("supplier").value = item.supplier;
-
-    document.getElementById("rak").value = item.rak;
-
-    document.getElementById("butir").value = item.butir;
-
-    document.getElementById("harga").value = item.harga;
-
-    document.getElementById("keterangan").value = item.keterangan;
-
-    editIndex = index;
-
-    window.scrollTo({
-
-        top:0,
-
-        behavior:"smooth"
-
-    });
+        .split("T")[0];
 
 }
+/*=========================================
+    LOAD DROPDOWN SUPPLIER
+=========================================*/
 
-/*====================================
-HAPUS DATA
-====================================*/
+function loadDropdownSupplier() {
 
-function hapusData(index){
+    supplierData = getSupplier();
 
-    if(!confirm("Hapus data stok ini?")){
+    supplierStok.innerHTML = `
+        <option value="">
+            -- Pilih Supplier --
+        </option>
+    `;
 
-        return;
+    supplierData
+        .filter(item => item.status === "Aktif")
+        .forEach(item => {
 
-    }
-
-    dataStok.splice(index,1);
-
-    simpanData();
-
-    tampilData();
-
-    showToast("🗑️ Data stok berhasil dihapus");
-
-}
-
-/*====================================
-RESET FORM
-====================================*/
-
-form.addEventListener("reset", function(){
-
-    editIndex = -1;
-
-});
-
-/*====================================
-SET TANGGAL HARI INI
-====================================*/
-
-const inputTanggal = document.getElementById("tanggal");
-
-if(inputTanggal){
-
-    inputTanggal.value = new Date().toISOString().split("T")[0];
-
-}
-/*====================================
-PENCARIAN DATA
-====================================*/
-
-if(search){
-
-    search.addEventListener("keyup", function(){
-
-        const keyword = this.value.toLowerCase();
-
-        const rows = tbody.querySelectorAll("tr");
-
-        rows.forEach(row=>{
-
-            row.style.display = row.innerText
-                .toLowerCase()
-                .includes(keyword)
-                ? ""
-                : "none";
+            supplierStok.innerHTML += `
+                <option value="${item.nama}">
+                    ${item.nama}
+                </option>
+            `;
 
         });
 
-    });
-
 }
 
-/*====================================
-EXPORT DATA STOK
-====================================*/
+/*=========================================
+    SIMPAN STOK
+=========================================*/
 
-function exportData(){
+function simpanStok() {
 
-    const blob = new Blob(
+    const id = stokId.value;
 
-        [JSON.stringify(dataStok,null,2)],
+    const supplier = supplierStok.value;
 
-        {type:"application/json"}
+    const rak = Number(jumlahRak.value);
 
-    );
+    const harga = Number(hargaBeli.value);
 
-    const link = document.createElement("a");
+    const tanggal = tanggalMasuk.value;
 
-    link.href = URL.createObjectURL(blob);
+    const keterangan = keteranganStok.value.trim();
 
-    link.download = "Data_Stok_TelurKita.json";
+    /*=========================
+        VALIDASI
+    =========================*/
 
-    link.click();
+    if (supplier === "") {
 
-}
+        showAlert("Silakan pilih supplier.");
 
-/*====================================
-IMPORT DATA STOK
-====================================*/
+        supplierStok.focus();
 
-function importData(input){
+        return;
 
-    const file = input.files[0];
+    }
 
-    if(!file) return;
+    if (rak <= 0 || isNaN(rak)) {
 
-    const reader = new FileReader();
+        showAlert("Jumlah rak harus lebih dari 0.");
 
-    reader.onload=function(e){
+        jumlahRak.focus();
 
-        try{
+        return;
 
-            dataStok = JSON.parse(e.target.result);
+    }
 
-            simpanData();
+    if (harga <= 0 || isNaN(harga)) {
 
-            tampilData();
+        showAlert("Harga beli tidak valid.");
 
-            showToast("✅ Import data berhasil");
+        hargaBeli.focus();
 
-        }catch{
+        return;
 
-            alert("File tidak valid");
+    }
+
+    /*=========================
+        MODE EDIT
+    =========================*/
+
+    if (id !== "") {
+
+        const index = stokData.findIndex(
+
+            item => item.id == id
+
+        );
+
+        if (index !== -1) {
+
+            stokData[index].supplier = supplier;
+
+            stokData[index].jumlahRak = rak;
+
+            stokData[index].hargaBeli = harga;
+
+            stokData[index].tanggalMasuk = tanggal;
+
+            stokData[index].keterangan = keterangan;
 
         }
 
     }
 
-    reader.readAsText(file);
+    /*=========================
+        MODE TAMBAH
+    =========================*/
+
+    else {
+
+        const index = stokData.findIndex(
+
+            item => item.supplier === supplier
+
+        );
+
+        if (index !== -1) {
+
+            /*=====================
+                TAMBAH RAK
+            =====================*/
+
+            stokData[index].jumlahRak += rak;
+
+            stokData[index].hargaBeli = harga;
+
+            stokData[index].tanggalMasuk = tanggal;
+
+            stokData[index].keterangan = keterangan;
+
+        }
+
+        else {
+
+            stokData.push({
+
+                id: generateID(),
+
+                supplier: supplier,
+
+                jumlahRak: rak,
+
+                hargaBeli: harga,
+
+                tanggalMasuk: tanggal,
+
+                keterangan: keterangan
+
+            });
+
+        }
+
+    }
+
+    /*=========================
+        SIMPAN
+    =========================*/
+
+    saveStok(stokData);
+
+    loadStok();
+
+    loadStatistik();
+
+    refreshDashboard();
+
+    resetFormStok();
+
+    modalStok.hide();
+
+    showAlert("Data stok berhasil disimpan.");
 
 }
 
-/*====================================
-HAPUS SEMUA DATA
-====================================*/
+/*=========================================
+    RESET FORM
+=========================================*/
 
-function resetData(){
+function resetFormStok() {
 
-    if(!confirm("Yakin ingin menghapus semua data stok?")){
+    stokId.value = "";
+
+    supplierStok.value = "";
+
+    jumlahRak.value = "";
+
+    hargaBeli.value = "";
+
+    tanggalMasuk.value = new Date()
+
+        .toISOString()
+
+        .split("T")[0];
+
+    keteranganStok.value = "";
+
+}
+
+/*=========================================
+    MODAL TAMBAH
+=========================================*/
+
+const tombolTambahStok = document.querySelector(
+
+    '[data-bs-target="#modalStok"]'
+
+);
+
+if (tombolTambahStok) {
+
+    tombolTambahStok.addEventListener("click", () => {
+
+        resetFormStok();
+
+        document.querySelector(
+
+            "#modalStok .modal-title"
+
+        ).textContent = "📦 Tambah Stok";
+
+    });
+
+}
+/*=========================================
+    LOAD DATA STOK
+=========================================*/
+
+function loadStok(keyword = "") {
+
+    stokData = getStok();
+
+    stokTable.innerHTML = "";
+
+    let no = 1;
+
+    const dataFilter = stokData.filter(item =>
+
+        item.supplier.toLowerCase().includes(keyword.toLowerCase())
+
+    );
+
+    if (dataFilter.length === 0) {
+
+        stokTable.innerHTML = `
+
+        <tr>
+
+            <td colspan="8" class="text-center py-5">
+
+                Belum ada data stok
+
+            </td>
+
+        </tr>
+
+        `;
 
         return;
 
     }
 
-    dataStok=[];
+    dataFilter.forEach(item => {
 
-    simpanData();
+        const totalNilai =
+            Number(item.jumlahRak) *
+            Number(item.hargaBeli);
 
-    tampilData();
+        stokTable.innerHTML += `
 
-    showToast("🗑️ Semua data stok dihapus");
+        <tr>
+
+            <td>${no++}</td>
+
+            <td>
+
+                <strong>${item.supplier}</strong>
+
+            </td>
+
+            <td class="text-center">
+
+                ${angka(item.jumlahRak)} Rak
+
+            </td>
+
+            <td class="text-end">
+
+                ${rupiah(item.hargaBeli)}
+
+            </td>
+
+            <td class="text-end">
+
+                ${rupiah(totalNilai)}
+
+            </td>
+
+            <td class="text-center">
+
+                ${item.tanggalMasuk}
+
+            </td>
+
+            <td>
+
+                ${item.keterangan || "-"}
+
+            </td>
+
+            <td class="text-center">
+
+                <button
+                    class="btn btn-sm btn-warning"
+                    onclick="editStok(${item.id})">
+
+                    <i class="bi bi-pencil"></i>
+
+                </button>
+
+                <button
+                    class="btn btn-sm btn-danger"
+                    onclick="hapusStok(${item.id})">
+
+                    <i class="bi bi-trash"></i>
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
 
 }
 
-/*====================================
-UPDATE DASHBOARD
-====================================*/
+/*=========================================
+    LOAD STATISTIK
+=========================================*/
 
-function updateDashboard(){
+function loadStatistik() {
 
-    localStorage.setItem(
+    stokData = getStok();
 
-        "dashboardUpdate",
+    supplierData = getSupplier();
 
-        Date.now()
+    let totalRak = 0;
+
+    let totalNilai = 0;
+
+    let lastUpdate = "-";
+
+    stokData.forEach(item => {
+
+        totalRak += Number(item.jumlahRak || 0);
+
+        totalNilai +=
+
+            Number(item.jumlahRak || 0) *
+
+            Number(item.hargaBeli || 0);
+
+        if (item.tanggalMasuk > lastUpdate) {
+
+            lastUpdate = item.tanggalMasuk;
+
+        }
+
+    });
+
+    document.getElementById("totalRak").textContent =
+        angka(totalRak);
+
+    document.getElementById("nilaiPersediaan").textContent =
+        rupiah(totalNilai);
+
+    document.getElementById("jumlahSupplier").textContent =
+        angka(stokData.length);
+
+    const sumRak = document.getElementById("sumRak");
+    if (sumRak) sumRak.textContent = angka(totalRak);
+
+    const sumSupplier = document.getElementById("sumSupplier");
+    if (sumSupplier) sumSupplier.textContent = angka(stokData.length);
+
+    const sumNilai = document.getElementById("sumNilai");
+    if (sumNilai) sumNilai.textContent = rupiah(totalNilai);
+
+    const update = document.getElementById("lastUpdate");
+    if (update) update.textContent = lastUpdate;
+
+}
+
+/*=========================================
+    REFRESH HALAMAN
+=========================================*/
+
+function refreshStokPage() {
+
+    loadDropdownSupplier();
+
+    loadStok();
+
+    loadStatistik();
+
+}
+/*=========================================
+    EDIT STOK
+=========================================*/
+
+function editStok(id) {
+
+    stokData = getStok();
+
+    const data = stokData.find(item => item.id == id);
+
+    if (!data) return;
+
+    stokId.value = data.id;
+
+    supplierStok.value = data.supplier;
+
+    jumlahRak.value = data.jumlahRak;
+
+    hargaBeli.value = data.hargaBeli;
+
+    tanggalMasuk.value = data.tanggalMasuk;
+
+    keteranganStok.value = data.keterangan || "";
+
+    document.querySelector(
+        "#modalStok .modal-title"
+    ).textContent = "✏ Edit Stok";
+
+    modalStok.show();
+
+}
+
+/*=========================================
+    HAPUS STOK
+=========================================*/
+
+function hapusStok(id) {
+
+    stokData = getStok();
+
+    const data = stokData.find(item => item.id == id);
+
+    if (!data) return;
+
+    if (!konfirmasi(
+
+        `Hapus data stok supplier "${data.supplier}" ?`
+
+    )) {
+
+        return;
+
+    }
+
+    stokData = stokData.filter(item => item.id != id);
+
+    saveStok(stokData);
+
+    refreshStokPage();
+
+    refreshDashboard();
+
+    showAlert("Data stok berhasil dihapus.");
+
+}
+
+/*=========================================
+    RESET MODAL
+=========================================*/
+
+const modalStokElement = document.getElementById("modalStok");
+
+if (modalStokElement) {
+
+    modalStokElement.addEventListener(
+
+        "hidden.bs.modal",
+
+        () => {
+
+            resetFormStok();
+
+        }
 
     );
 
 }
 
-const simpanLama = simpanData;
+/*=========================================
+    AUTO REFRESH ANTAR TAB
+=========================================*/
 
-simpanData = function(){
+window.addEventListener("storage", function (event) {
 
-    simpanLama();
+    if (event.key === KEY_STOK) {
 
-    updateDashboard();
-
-}
-
-/*====================================
-AUTO REFRESH
-====================================*/
-
-window.addEventListener("storage",function(e){
-
-    if(e.key==="dataStok"){
-
-        dataStok=JSON.parse(localStorage.getItem("dataStok"))||[];
-
-        tampilData();
+        refreshStokPage();
 
     }
 
 });
 
-/*====================================
-SELESAI
-====================================*/
+/*=========================================
+    REFRESH SETELAH PERUBAHAN
+=========================================*/
 
-console.log("stok.js Premium V2 aktif");
+function selesaiUpdateStok() {
+
+    refreshStokPage();
+
+    refreshDashboard();
+
+}
+/*=========================================
+    VALIDASI INPUT ANGKA
+=========================================*/
+
+jumlahRak.addEventListener("input", function () {
+
+    if (Number(this.value) < 0) {
+
+        this.value = "";
+
+    }
+
+});
+
+hargaBeli.addEventListener("input", function () {
+
+    if (Number(this.value) < 0) {
+
+        this.value = "";
+
+    }
+
+});
+
+/*=========================================
+    ENTER UNTUK SIMPAN
+=========================================*/
+
+document.addEventListener("keydown", function (e) {
+
+    if (e.key !== "Enter") return;
+
+    const modalAktif = document
+        .getElementById("modalStok")
+        .classList.contains("show");
+
+    if (!modalAktif) return;
+
+    e.preventDefault();
+
+    simpanStok();
+
+});
+
+/*=========================================
+    REFRESH DROPDOWN SUPPLIER
+=========================================*/
+
+window.addEventListener("storage", function (event) {
+
+    if (event.key === KEY_SUPPLIER) {
+
+        loadDropdownSupplier();
+
+    }
+
+});
+
+/*=========================================
+    LOAD PERTAMA
+=========================================*/
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    refreshStokPage();
+
+});
+
+/*=========================================
+    FINAL CHECK
+=========================================*/
+
+function cekStokKosong() {
+
+    stokData = getStok();
+
+    if (stokData.length === 0) {
+
+        console.log("Belum ada data stok.");
+
+        return;
+
+    }
+
+}
+
+/*=========================================
+    SINKRONISASI DASHBOARD
+=========================================*/
+
+function sinkronDashboard() {
+
+    try {
+
+        refreshDashboard();
+
+    } catch (e) {
+
+        console.log("Dashboard tidak aktif.");
+
+    }
+
+}
+
+/*=========================================
+    AUTO SINKRONISASI
+=========================================*/
+
+function selesaiSimpanStok() {
+
+    refreshStokPage();
+
+    sinkronDashboard();
+
+}
+
+/*=========================================
+    AUTO LOAD
+=========================================*/
+
+cekStokKosong();
+
+console.log("📦 Modul Stok Premium V3 siap digunakan.");
+
+/*=========================================
+    END OF FILE
+=========================================*/

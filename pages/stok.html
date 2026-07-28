@@ -3,21 +3,27 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<title>Stok | TelurKita Premium V2</title>
+    <title>Stok | TelurKita Premium V3</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-rel="stylesheet">
+    <!-- Bootstrap -->
 
-<link rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
 
-<link rel="stylesheet"
-href="../style.css">
+    <!-- Bootstrap Icons -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+          rel="stylesheet">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+          href="../style.css">
 
 </head>
 
@@ -25,23 +31,31 @@ href="../style.css">
 
 <div class="wrapper">
 
-<!-- ========================= -->
-<!-- SIDEBAR -->
-<!-- ========================= -->
+<!-- =====================================
+SIDEBAR
+===================================== -->
 
 <aside class="sidebar">
 
 <div class="logo">
 
-🥚
+<div class="logo-icon">
 
-<span>TelurKita</span>
+🥚
 
 </div>
 
-<nav>
+<div>
 
-<ul>
+<h3>TelurKita</h3>
+
+<small>Premium V3</small>
+
+</div>
+
+</div>
+
+<ul class="menu">
 
 <li>
 
@@ -49,31 +63,7 @@ href="../style.css">
 
 <i class="bi bi-grid-fill"></i>
 
-<span>Dashboard</span>
-
-</a>
-
-</li>
-
-<li class="active">
-
-<a href="stok.html">
-
-<i class="bi bi-box-seam-fill"></i>
-
-<span>Stok</span>
-
-</a>
-
-</li>
-
-<li>
-
-<a href="penjualan.html">
-
-<i class="bi bi-cart-fill"></i>
-
-<span>Penjualan</span>
+Dashboard
 
 </a>
 
@@ -85,7 +75,43 @@ href="../style.css">
 
 <i class="bi bi-truck"></i>
 
-<span>Supplier</span>
+Supplier
+
+</a>
+
+</li>
+
+<li class="active">
+
+<a href="stok.html">
+
+<i class="bi bi-box-seam-fill"></i>
+
+Stok
+
+</a>
+
+</li>
+
+<li>
+
+<a href="pelanggan.html">
+
+<i class="bi bi-people-fill"></i>
+
+Pelanggan
+
+</a>
+
+</li>
+
+<li>
+
+<a href="penjualan.html">
+
+<i class="bi bi-cart-fill"></i>
+
+Penjualan
 
 </a>
 
@@ -97,7 +123,7 @@ href="../style.css">
 
 <i class="bi bi-wallet2"></i>
 
-<span>Pengeluaran</span>
+Pengeluaran
 
 </a>
 
@@ -109,7 +135,7 @@ href="../style.css">
 
 <i class="bi bi-cash-stack"></i>
 
-<span>Piutang</span>
+Piutang
 
 </a>
 
@@ -119,9 +145,9 @@ href="../style.css">
 
 <a href="laporan.html">
 
-<i class="bi bi-bar-chart-line-fill"></i>
+<i class="bi bi-bar-chart-fill"></i>
 
-<span>Laporan</span>
+Laporan
 
 </a>
 
@@ -133,7 +159,7 @@ href="../style.css">
 
 <i class="bi bi-gear-fill"></i>
 
-<span>Pengaturan</span>
+Pengaturan
 
 </a>
 
@@ -141,21 +167,21 @@ href="../style.css">
 
 </ul>
 
-</nav>
-
 </aside>
 
-<!-- ========================= -->
-<!-- CONTENT -->
-<!-- ========================= -->
+<!-- =====================================
+CONTENT
+===================================== -->
 
-<main class="content">
+<main class="main-content">
 
 <header class="topbar">
 
 <div class="left">
 
-<button id="menuToggle">
+<button
+id="menuToggle"
+class="menu-btn">
 
 <i class="bi bi-list"></i>
 
@@ -163,7 +189,11 @@ href="../style.css">
 
 <div>
 
-<h2>Manajemen Stok</h2>
+<h2>
+
+Manajemen Stok
+
+</h2>
 
 <small id="tanggalJam"></small>
 
@@ -173,48 +203,81 @@ href="../style.css">
 
 <div class="right">
 
-<div class="search">
-
-<i class="bi bi-search"></i>
-
-<input
-type="text"
-id="searchStok"
-placeholder="Cari Supplier...">
-
-</div>
-
 <button
 id="darkMode"
-class="btn btn-light">
+class="dark-btn">
 
 <i class="bi bi-moon-stars-fill"></i>
 
 </button>
 
-<div class="profile">
-
-<i class="bi bi-person-circle"></i>
-
-<span>Admin</span>
-
-</div>
-
 </div>
 
 </header>
 
-<section class="dashboard">
+<!-- =====================================
+HEADER
+===================================== -->
 
-<div class="row g-4">
+<div class="dashboard-card-lg">
 
-<div class="col-lg-4">
+<div class="card-body">
 
-<div class="stat-card orange">
+<div class="d-flex justify-content-between align-items-center flex-wrap">
 
 <div>
 
-<h6>Total Rak</h6>
+<h3>
+
+📦 Manajemen Stok
+
+</h3>
+
+<p class="text-muted">
+
+Kelola pembelian stok telur berdasarkan supplier.
+
+</p>
+
+</div>
+
+<button
+
+class="btn btn-warning"
+
+data-bs-toggle="modal"
+
+data-bs-target="#modalStok">
+
+<i class="bi bi-plus-circle"></i>
+
+Tambah Stok
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =====================================
+STATISTIK
+===================================== -->
+
+<div class="row mt-4">
+
+<div class="col-md-3">
+
+<div class="dashboard-card primary">
+
+<div class="card-info">
+
+<small>
+
+Total Rak
+
+</small>
 
 <h2 id="totalRak">
 
@@ -222,39 +285,39 @@ class="btn btn-light">
 
 </h2>
 
-<small>Rak tersedia</small>
-
 </div>
 
-<div class="icon">
+<div class="card-icon">
 
-<i class="bi bi-box-seam-fill"></i>
-
-</div>
+<i class="bi bi-box-seam"></i>
 
 </div>
 
 </div>
 
-<div class="col-lg-4">
+</div>
 
-<div class="stat-card green">
+<div class="col-md-3">
 
-<div>
+<div class="dashboard-card success">
 
-<h6>Nilai Persediaan</h6>
+<div class="card-info">
 
-<h2 id="nilaiStok">
+<small>
+
+Nilai Persediaan
+
+</small>
+
+<h2 id="nilaiPersediaan">
 
 Rp0
 
 </h2>
 
-<small>Total nilai stok</small>
-
 </div>
 
-<div class="icon">
+<div class="card-icon">
 
 <i class="bi bi-cash-stack"></i>
 
@@ -264,13 +327,17 @@ Rp0
 
 </div>
 
-<div class="col-lg-4">
+<div class="col-md-3">
 
-<div class="stat-card blue">
+<div class="dashboard-card warning">
 
-<div>
+<div class="card-info">
 
-<h6>Supplier</h6>
+<small>
+
+Total Supplier
+
+</small>
 
 <h2 id="jumlahSupplier">
 
@@ -278,11 +345,9 @@ Rp0
 
 </h2>
 
-<small>Supplier aktif</small>
-
 </div>
 
-<div class="icon">
+<div class="card-icon">
 
 <i class="bi bi-truck"></i>
 
@@ -292,28 +357,60 @@ Rp0
 
 </div>
 
+<div class="col-md-3">
+
+<div class="dashboard-card danger">
+
+<div class="card-info">
+
+<small>
+
+Jenis Stok
+
+</small>
+
+<h2>
+
+Telur
+
+</h2>
+
 </div>
-<!-- ========================= -->
-<!-- TABEL DATA STOK -->
-<!-- ========================= -->
 
-<div class="card dashboard-card mt-4">
+<div class="card-icon">
 
-    <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+<i class="bi bi-egg-fill"></i>
 
-        <h5>📋 Data Stok</h5>
+</div>
 
-        <div>
+</div>
 
-            <button class="btn btn-success btn-sm" onclick="exportData()">
-                <i class="bi bi-download"></i>
-                Export
-            </button>
+</div>
 
-            <button class="btn btn-danger btn-sm" onclick="resetData()">
-                <i class="bi bi-trash"></i>
-                Hapus Semua
-            </button>
+</div>
+<!-- =====================================
+TABEL STOK
+===================================== -->
+
+<div class="dashboard-card-lg mt-4">
+
+    <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+        <h5>
+
+            <i class="bi bi-box-seam-fill"></i>
+
+            Data Stok
+
+        </h5>
+
+        <div style="max-width:350px;width:100%;">
+
+            <input
+                type="text"
+                id="cariStok"
+                class="form-control"
+                placeholder="🔍 Cari supplier...">
 
         </div>
 
@@ -323,39 +420,61 @@ Rp0
 
         <div class="table-responsive">
 
-            <table class="table table-hover align-middle" id="tabelStok">
+            <table class="table table-hover align-middle">
 
                 <thead>
 
                     <tr>
 
-                        <th>No</th>
-
-                        <th>Tanggal</th>
+                        <th width="50">No</th>
 
                         <th>Supplier</th>
 
-                        <th>Rak</th>
+                        <th class="text-center">
 
-                        <th>Butir</th>
+                            Jumlah Rak
 
-                        <th>Harga Beli</th>
+                        </th>
 
-                        <th>Total</th>
+                        <th class="text-end">
+
+                            Harga Beli / Rak
+
+                        </th>
+
+                        <th class="text-end">
+
+                            Total Nilai
+
+                        </th>
+
+                        <th class="text-center">
+
+                            Tanggal Masuk
+
+                        </th>
 
                         <th>Keterangan</th>
 
-                        <th>Aksi</th>
+                        <th width="140"
+                            class="text-center">
+
+                            Aksi
+
+                        </th>
 
                     </tr>
 
                 </thead>
 
-                <tbody id="dataStok">
+                <tbody id="stokTable">
 
                     <tr>
 
-                        <td colspan="9" class="text-center text-muted">
+                        <td colspan="8"
+                            class="text-center py-5 text-muted">
+
+                            <i class="bi bi-inbox fs-1 d-block mb-3"></i>
 
                             Belum ada data stok
 
@@ -373,36 +492,397 @@ Rp0
 
 </div>
 
-<!-- ========================= -->
-<!-- FOOTER -->
-<!-- ========================= -->
+<!-- =====================================
+MODAL STOK
+===================================== -->
 
-<footer class="footer">
+<div class="modal fade"
 
-    <p>
-        © 2026 <strong>TelurKita Premium V2</strong><br>
-        Sistem Manajemen Toko Telur
-    </p>
+     id="modalStok"
+
+     tabindex="-1">
+
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+
+                    📦 Tambah Stok
+
+                </h5>
+
+                <button
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <input
+                    type="hidden"
+                    id="stokId">
+
+                <div class="row">
+
+                    <!-- Supplier -->
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Supplier
+
+                        </label>
+
+                        <select
+
+                            id="supplierStok"
+
+                            class="form-select">
+
+                            <option value="">
+
+                                -- Pilih Supplier --
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- Jumlah Rak -->
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Jumlah Rak
+
+                        </label>
+
+                        <input
+
+                            type="number"
+
+                            id="jumlahRak"
+
+                            class="form-control"
+
+                            min="1"
+
+                            placeholder="Contoh : 120">
+
+                    </div>
+
+                    <!-- Harga -->
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Harga Beli / Rak
+
+                        </label>
+
+                        <input
+
+                            type="number"
+
+                            id="hargaBeli"
+
+                            class="form-control"
+
+                            min="0"
+
+                            placeholder="Contoh : 500000">
+
+                    </div>
+
+                    <!-- Tanggal -->
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Tanggal Masuk
+
+                        </label>
+
+                        <input
+
+                            type="date"
+
+                            id="tanggalMasuk"
+
+                            class="form-control">
+
+                    </div>
+
+                    <!-- Keterangan -->
+
+                    <div class="col-12">
+
+                        <label class="form-label">
+
+                            Keterangan
+
+                        </label>
+
+                        <textarea
+
+                            id="keteranganStok"
+
+                            class="form-control"
+
+                            rows="3"
+
+                            placeholder="Opsional">
+
+                        </textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+
+                    class="btn btn-secondary"
+
+                    data-bs-dismiss="modal">
+
+                    Batal
+
+                </button>
+
+                <button
+
+                    id="btnSimpanStok"
+
+                    class="btn btn-warning">
+
+                    <i class="bi bi-check-circle"></i>
+
+                    Simpan Stok
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- =====================================
+RINGKASAN STOK
+===================================== -->
+
+<div class="row mt-4">
+
+    <div class="col-lg-8">
+
+        <div class="dashboard-card-lg">
+
+            <div class="card-header">
+
+                <h5>
+
+                    <i class="bi bi-info-circle-fill"></i>
+
+                    Ringkasan Persediaan
+
+                </h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="row g-4">
+
+                    <div class="col-md-3">
+
+                        <div class="summary-box">
+
+                            <small>Total Rak</small>
+
+                            <h3 id="sumRak">
+
+                                0
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <div class="summary-box">
+
+                            <small>Total Supplier</small>
+
+                            <h3 id="sumSupplier">
+
+                                0
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <div class="summary-box">
+
+                            <small>Nilai Persediaan</small>
+
+                            <h3 id="sumNilai">
+
+                                Rp0
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <div class="summary-box">
+
+                            <small>Update Terakhir</small>
+
+                            <h3 id="lastUpdate">
+
+                                -
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-4">
+
+        <div class="dashboard-card-lg">
+
+            <div class="card-header">
+
+                <h5>
+
+                    <i class="bi bi-lightbulb-fill"></i>
+
+                    Informasi
+
+                </h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <ul class="list-group list-group-flush">
+
+                    <li class="list-group-item">
+
+                        ✔ Pembelian stok akan menambah jumlah rak supplier.
+
+                    </li>
+
+                    <li class="list-group-item">
+
+                        ✔ Penjualan akan otomatis mengurangi jumlah rak.
+
+                    </li>
+
+                    <li class="list-group-item">
+
+                        ✔ Dashboard diperbarui secara otomatis.
+
+                    </li>
+
+                    <li class="list-group-item">
+
+                        ✔ Data supplier tidak menyimpan stok.
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =====================================
+FOOTER
+===================================== -->
+
+<footer class="footer mt-4">
+
+    <hr>
+
+    <div class="footer-content">
+
+        <p>
+
+            © 2026 TelurKita Premium V3
+
+        </p>
+
+        <p>
+
+            Sistem Manajemen Distribusi Telur
+
+        </p>
+
+    </div>
 
 </footer>
-
-</section>
 
 </main>
 
 </div>
 
-<!-- Bootstrap JS -->
+<!-- =====================================
+BOOTSTRAP
+===================================== -->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Chart JS -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- =====================================
+GLOBAL SCRIPT
+===================================== -->
 
-<!-- Script Utama -->
 <script src="../script.js"></script>
 
-<!-- Script Halaman Stok -->
+<!-- =====================================
+STOK SCRIPT
+===================================== -->
+
 <script src="../js/stok.js"></script>
 
 </body>
+
 </html>

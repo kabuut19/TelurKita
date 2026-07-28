@@ -3,17 +3,23 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Supplier | TelurKita Premium V2</title>
+    <title>Supplier | TelurKita Premium V3</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<link rel="stylesheet" href="../style.css">
+    <!-- Bootstrap Icons -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="../style.css">
 
 </head>
 
@@ -21,91 +27,155 @@
 
 <div class="wrapper">
 
-<!-- SIDEBAR -->
+<!-- ==========================
+SIDEBAR
+========================== -->
 
 <aside class="sidebar">
 
 <div class="logo">
 
-🥚 <span>TelurKita</span>
+<div class="logo-icon">
+
+🥚
 
 </div>
 
-<nav>
+<div>
 
-<ul>
+<h3>TelurKita</h3>
+
+<small>Premium V3</small>
+
+</div>
+
+</div>
+
+<ul class="menu">
 
 <li>
+
 <a href="../index.html">
+
 <i class="bi bi-grid-fill"></i>
+
 Dashboard
-</a>
-</li>
 
-<li>
-<a href="stok.html">
-<i class="bi bi-box-seam-fill"></i>
-Stok
 </a>
-</li>
 
-<li>
-<a href="penjualan.html">
-<i class="bi bi-cart-fill"></i>
-Penjualan
-</a>
 </li>
 
 <li class="active">
+
 <a href="supplier.html">
+
 <i class="bi bi-truck"></i>
+
 Supplier
+
 </a>
+
 </li>
 
 <li>
+
+<a href="stok.html">
+
+<i class="bi bi-box-seam-fill"></i>
+
+Stok
+
+</a>
+
+</li>
+
+<li>
+
+<a href="pelanggan.html">
+
+<i class="bi bi-people-fill"></i>
+
+Pelanggan
+
+</a>
+
+</li>
+
+<li>
+
+<a href="penjualan.html">
+
+<i class="bi bi-cart-fill"></i>
+
+Penjualan
+
+</a>
+
+</li>
+
+<li>
+
 <a href="pengeluaran.html">
+
 <i class="bi bi-wallet2"></i>
+
 Pengeluaran
+
 </a>
+
 </li>
 
 <li>
+
 <a href="piutang.html">
+
 <i class="bi bi-cash-stack"></i>
+
 Piutang
+
 </a>
+
 </li>
 
 <li>
+
 <a href="laporan.html">
+
 <i class="bi bi-bar-chart-fill"></i>
+
 Laporan
+
 </a>
+
 </li>
 
 <li>
+
 <a href="pengaturan.html">
+
 <i class="bi bi-gear-fill"></i>
+
 Pengaturan
+
 </a>
+
 </li>
 
 </ul>
 
-</nav>
-
 </aside>
 
-<!-- CONTENT -->
+<!-- ==========================
+CONTENT
+========================== -->
 
-<main class="content">
+<main class="main-content">
 
 <header class="topbar">
 
 <div class="left">
 
-<button id="menuToggle">
+<button id="menuToggle" class="menu-btn">
 
 <i class="bi bi-list"></i>
 
@@ -113,7 +183,11 @@ Pengaturan
 
 <div>
 
-<h2>Data Supplier</h2>
+<h2>
+
+Master Supplier
+
+</h2>
 
 <small id="tanggalJam"></small>
 
@@ -123,48 +197,74 @@ Pengaturan
 
 <div class="right">
 
-<div class="search">
-
-<i class="bi bi-search"></i>
-
-<input
-type="text"
-id="searchSupplier"
-placeholder="Cari supplier...">
-
-</div>
-
-<button id="darkMode" class="btn btn-light">
+<button id="darkMode" class="dark-btn">
 
 <i class="bi bi-moon-stars-fill"></i>
 
 </button>
 
-<div class="profile">
-
-<i class="bi bi-person-circle"></i>
-
-<span>Admin</span>
-
-</div>
-
 </div>
 
 </header>
 
-<section class="dashboard">
+<!-- ==========================
+TITLE
+========================== -->
 
-<div class="row g-4">
+<div class="dashboard-card-lg">
 
-<div class="col-lg-4">
+<div class="card-body">
 
-<div class="stat-card orange">
+<div class="d-flex justify-content-between align-items-center flex-wrap">
 
 <div>
 
-<h6>Total Supplier</h6>
+<h3>
 
-<h2 id="totalSupplier">
+🚚 Master Supplier
+
+</h3>
+
+<p class="text-muted">
+
+Data supplier digunakan pada menu Stok dan Penjualan.
+
+</p>
+
+</div>
+
+<button
+class="btn btn-warning"
+data-bs-toggle="modal"
+data-bs-target="#modalSupplier">
+
+<i class="bi bi-plus-circle"></i>
+
+Tambah Supplier
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================
+STATISTIK
+========================== -->
+
+<div class="row mt-4">
+
+<div class="col-md-3">
+
+<div class="dashboard-card warning">
+
+<div class="card-info">
+
+<small>Total Supplier</small>
+
+<h2 id="totalSupplierCard">
 
 0
 
@@ -172,7 +272,7 @@ placeholder="Cari supplier...">
 
 </div>
 
-<div class="icon">
+<div class="card-icon">
 
 <i class="bi bi-truck"></i>
 
@@ -182,13 +282,13 @@ placeholder="Cari supplier...">
 
 </div>
 
-<div class="col-lg-4">
+<div class="col-md-3">
 
-<div class="stat-card green">
+<div class="dashboard-card success">
 
-<div>
+<div class="card-info">
 
-<h6>Supplier Aktif</h6>
+<small>Supplier Aktif</small>
 
 <h2 id="supplierAktif">
 
@@ -198,25 +298,25 @@ placeholder="Cari supplier...">
 
 </div>
 
-<div class="icon">
+<div class="card-icon">
 
-<i class="bi bi-check-circle-fill"></i>
-
-</div>
+<i class="bi bi-check-circle"></i>
 
 </div>
 
 </div>
 
-<div class="col-lg-4">
+</div>
 
-<div class="stat-card blue">
+<div class="col-md-3">
 
-<div>
+<div class="dashboard-card danger">
 
-<h6>Total Pengiriman</h6>
+<div class="card-info">
 
-<h2 id="totalPengiriman">
+<small>Supplier Non Aktif</small>
+
+<h2 id="supplierNonAktif">
 
 0
 
@@ -224,7 +324,33 @@ placeholder="Cari supplier...">
 
 </div>
 
-<div class="icon">
+<div class="card-icon">
+
+<i class="bi bi-x-circle"></i>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="dashboard-card primary">
+
+<div class="card-info">
+
+<small>Total Rak</small>
+
+<h2 id="totalRakSupplier">
+
+0
+
+</h2>
+
+</div>
+
+<div class="card-icon">
 
 <i class="bi bi-box-seam"></i>
 
@@ -235,294 +361,29 @@ placeholder="Cari supplier...">
 </div>
 
 </div>
-<!-- ========================= -->
-<!-- FORM SUPPLIER -->
-<!-- ========================= -->
+<!-- ========================================= -->
+<!-- FILTER & TABEL SUPPLIER -->
+<!-- ========================================= -->
 
-<div class="card dashboard-card mt-4">
+<div class="dashboard-card-lg mt-4">
 
-    <div class="card-header">
+    <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-3">
 
         <h5>
-            🚚 Data Supplier
+
+            <i class="bi bi-table"></i>
+
+            Data Supplier
+
         </h5>
 
-    </div>
-
-    <div class="card-body">
-
-        <form id="formSupplier">
-
-            <div class="row">
-
-                <div class="col-md-4 mb-3">
-
-                    <label class="form-label">
-
-                        Nama Supplier
-
-                    </label>
-
-                    <input
-                        type="text"
-                        id="namaSupplier"
-                        class="form-control"
-                        placeholder="Contoh : CV Maju Jaya"
-                        required>
-
-                </div>
-
-                <div class="col-md-4 mb-3">
-
-                    <label class="form-label">
-
-                        Nomor HP
-
-                    </label>
-
-                    <input
-                        type="tel"
-                        id="noHp"
-                        class="form-control"
-                        placeholder="08xxxxxxxxxx"
-                        required>
-
-                </div>
-
-                <div class="col-md-4 mb-3">
-
-                    <label class="form-label">
-
-                        PIC / Kontak
-
-                    </label>
-
-                    <input
-                        type="text"
-                        id="pic"
-                        class="form-control"
-                        placeholder="Nama kontak">
-
-                </div>
-
-                <div class="col-md-6 mb-3">
-
-                    <label class="form-label">
-
-                        Alamat
-
-                    </label>
-
-                    <textarea
-                        id="alamat"
-                        rows="3"
-                        class="form-control"
-                        placeholder="Alamat supplier"></textarea>
-
-                </div>
-
-                <div class="col-md-3 mb-3">
-
-                    <label class="form-label">
-
-                        Status
-
-                    </label>
-
-                    <select
-                        id="status"
-                        class="form-select">
-
-                        <option value="Aktif">
-
-                            Aktif
-
-                        </option>
-
-                        <option value="Nonaktif">
-
-                            Nonaktif
-
-                        </option>
-
-                    </select>
-
-                </div>
-
-                <div class="col-md-3 mb-3">
-
-                    <label class="form-label">
-
-                        Keterangan
-
-                    </label>
-
-                    <input
-                        type="text"
-                        id="keterangan"
-                        class="form-control"
-                        placeholder="Opsional">
-
-                </div>
-
-            </div>
-
-            <div class="mt-3">
-
-                <button
-                    type="submit"
-                    class="btn btn-warning">
-
-                    <i class="bi bi-save"></i>
-
-                    Simpan Supplier
-
-                </button>
-
-                <button
-                    type="reset"
-                    class="btn btn-secondary">
-
-                    <i class="bi bi-arrow-clockwise"></i>
-
-                    Reset
-
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
-
-<!-- ========================= -->
-<!-- INFORMASI -->
-<!-- ========================= -->
-
-<div class="row mt-4">
-
-    <div class="col-lg-6">
-
-        <div class="dashboard-card">
-
-            <div class="card-header">
-
-                <h5>
-                    📊 Ringkasan
-                </h5>
-
-            </div>
-
-            <div class="card-body">
-
-                <p>
-                    Total Supplier
-
-                    <strong id="ringSupplier">
-
-                        0
-
-                    </strong>
-
-                </p>
-
-                <p>
-
-                    Supplier Aktif
-
-                    <strong id="ringAktif">
-
-                        0
-
-                    </strong>
-
-                </p>
-
-                <p>
-
-                    Supplier Nonaktif
-
-                    <strong id="ringNonaktif">
-
-                        0
-
-                    </strong>
-
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="col-lg-6">
-
-        <div class="dashboard-card">
-
-            <div class="card-header">
-
-                <h5>
-
-                    💡 Keterangan
-
-                </h5>
-
-            </div>
-
-            <div class="card-body">
-
-                <ul class="activity-list">
-
-                    <li>✅ Supplier aktif akan muncul pada dropdown halaman Stok.</li>
-
-                    <li>🚚 Supplier nonaktif disembunyikan dari dropdown.</li>
-
-                    <li>📈 Riwayat transaksi tetap tersimpan meskipun supplier dinonaktifkan.</li>
-
-                    <li>🔄 Data supplier dapat diedit kapan saja.</li>
-
-                </ul>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-<!-- ========================= -->
-<!-- TABEL SUPPLIER -->
-<!-- ========================= -->
-
-<div class="card dashboard-card mt-4">
-
-    <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
-
-        <h5>📋 Data Supplier</h5>
-
-        <div class="d-flex gap-2">
-
-            <button class="btn btn-success btn-sm" onclick="exportSupplier()">
-                <i class="bi bi-download"></i>
-                Export
-            </button>
-
-            <label class="btn btn-primary btn-sm mb-0">
-                <i class="bi bi-upload"></i>
-                Import
-                <input type="file"
-                       accept=".json"
-                       onchange="importSupplier(this)"
-                       hidden>
-            </label>
-
-            <button class="btn btn-danger btn-sm" onclick="resetSupplier()">
-                <i class="bi bi-trash"></i>
-                Hapus Semua
-            </button>
+        <div style="max-width:350px;width:100%;">
+
+            <input
+                type="text"
+                id="cariSupplier"
+                class="form-control"
+                placeholder="🔍 Cari nama supplier...">
 
         </div>
 
@@ -538,31 +399,46 @@ placeholder="Cari supplier...">
 
                     <tr>
 
-                        <th>No</th>
+                        <th width="50">No</th>
 
-                        <th>Supplier</th>
+                        <th>Nama Supplier</th>
 
                         <th>No HP</th>
 
                         <th>PIC</th>
 
-                        <th>Alamat</th>
+                        <th class="text-center">
 
-                        <th>Status</th>
+                            Jumlah Rak
+
+                        </th>
+
+                        <th class="text-center">
+
+                            Status
+
+                        </th>
 
                         <th>Keterangan</th>
 
-                        <th>Aksi</th>
+                        <th width="140" class="text-center">
+
+                            Aksi
+
+                        </th>
 
                     </tr>
 
                 </thead>
 
-                <tbody id="dataSupplier">
+                <tbody id="supplierTable">
 
                     <tr>
 
-                        <td colspan="8" class="text-center text-muted">
+                        <td colspan="8"
+                            class="text-center text-muted py-5">
+
+                            <i class="bi bi-inbox fs-1 d-block mb-3"></i>
 
                             Belum ada data supplier
 
@@ -580,39 +456,231 @@ placeholder="Cari supplier...">
 
 </div>
 
-<!-- ========================= -->
-<!-- FOOTER -->
-<!-- ========================= -->
+<!-- ========================================= -->
+<!-- MODAL TAMBAH / EDIT SUPPLIER -->
+<!-- ========================================= -->
+
+<div class="modal fade"
+     id="modalSupplier"
+     tabindex="-1">
+
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+
+                    🚚 Tambah Supplier
+
+                </h5>
+
+                <button
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <input
+                    type="hidden"
+                    id="supplierId">
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Nama Supplier
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="namaSupplier"
+                            class="form-control"
+                            placeholder="Contoh : CV Maju Jaya">
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            No HP
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="hpSupplier"
+                            class="form-control"
+                            placeholder="08xxxxxxxxxx">
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            PIC
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="picSupplier"
+                            class="form-control"
+                            placeholder="Nama PIC">
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Status
+
+                        </label>
+
+                        <select
+                            id="statusSupplier"
+                            class="form-select">
+
+                            <option value="Aktif">
+
+                                Aktif
+
+                            </option>
+
+                            <option value="Non Aktif">
+
+                                Non Aktif
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-12 mb-3">
+
+                        <label class="form-label">
+
+                            Alamat
+
+                        </label>
+
+                        <textarea
+                            id="alamatSupplier"
+                            class="form-control"></textarea>
+
+                    </div>
+
+                    <div class="col-12">
+
+                        <label class="form-label">
+
+                            Keterangan
+
+                        </label>
+
+                        <textarea
+                            id="ketSupplier"
+                            class="form-control"></textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+
+                    Batal
+
+                </button>
+
+                <button
+                    id="btnSimpanSupplier"
+                    class="btn btn-warning">
+
+                    <i class="bi bi-check-circle"></i>
+
+                    Simpan Supplier
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- =========================================
+FOOTER
+========================================= -->
 
 <footer class="footer">
 
-    <p>
+    <hr>
 
-        © 2026 <strong>TelurKita Premium V2</strong><br>
+    <div class="footer-content">
 
-        Sistem Manajemen Supplier
+        <p>
 
-    </p>
+            © 2026 TelurKita Premium V3
+
+        </p>
+
+        <p>
+
+            Sistem Manajemen Distribusi Telur
+
+        </p>
+
+    </div>
 
 </footer>
-
-</section>
 
 </main>
 
 </div>
 
-<!-- Bootstrap JS -->
+<!-- =========================================
+BOOTSTRAP
+========================================= -->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Chart JS -->
+<!-- =========================================
+CHART JS
+========================================= -->
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<!-- Script Utama -->
+<!-- =========================================
+GLOBAL SCRIPT
+========================================= -->
+
 <script src="../script.js"></script>
 
-<!-- Script Supplier -->
+<!-- =========================================
+SUPPLIER SCRIPT
+========================================= -->
+
 <script src="../js/supplier.js"></script>
 
 </body>
+
 </html>
