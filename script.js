@@ -1,34 +1,250 @@
-/*====================================
-TELURKITA PREMIUM V2
-====================================*/
+/*=================================================
+    TELURKITA PREMIUM V3
+==================================================*/
 
-document.addEventListener("DOMContentLoaded", () => {
+/*=========================================
+    LOCAL STORAGE KEY
+=========================================*/
 
-    initSidebar();
+const KEY_SUPPLIER = "telurkita_supplier";
 
-    initClock();
+const KEY_STOK = "telurkita_stok";
 
-    initChart();
+const KEY_PELANGGAN = "telurkita_pelanggan";
 
-    initDarkMode();
+const KEY_PENJUALAN = "telurkita_penjualan";
 
-    loadDashboard();
+const KEY_PENGELUARAN = "telurkita_pengeluaran";
 
-});
+const KEY_PIUTANG = "telurkita_piutang";
 
-/*====================================
-SIDEBAR
-====================================*/
+/*=========================================
+    DEFAULT LOCAL STORAGE
+=========================================*/
 
-function initSidebar() {
+function initStorage() {
 
-    const menu = document.getElementById("menuToggle");
+    if (!localStorage.getItem(KEY_SUPPLIER)) {
 
-    const sidebar = document.querySelector(".sidebar");
+        localStorage.setItem(KEY_SUPPLIER, JSON.stringify([]));
 
-    if (!menu || !sidebar) return;
+    }
 
-    menu.addEventListener("click", () => {
+    if (!localStorage.getItem(KEY_STOK)) {
+
+        localStorage.setItem(KEY_STOK, JSON.stringify([]));
+
+    }
+
+    if (!localStorage.getItem(KEY_PELANGGAN)) {
+
+        localStorage.setItem(KEY_PELANGGAN, JSON.stringify([]));
+
+    }
+
+    if (!localStorage.getItem(KEY_PENJUALAN)) {
+
+        localStorage.setItem(KEY_PENJUALAN, JSON.stringify([]));
+
+    }
+
+    if (!localStorage.getItem(KEY_PENGELUARAN)) {
+
+        localStorage.setItem(KEY_PENGELUARAN, JSON.stringify([]));
+
+    }
+
+    if (!localStorage.getItem(KEY_PIUTANG)) {
+
+        localStorage.setItem(KEY_PIUTANG, JSON.stringify([]));
+
+    }
+
+}
+
+initStorage();
+
+/*=========================================
+    GET DATA
+=========================================*/
+
+function getSupplier() {
+
+    return JSON.parse(localStorage.getItem(KEY_SUPPLIER)) || [];
+
+}
+
+function getStok() {
+
+    return JSON.parse(localStorage.getItem(KEY_STOK)) || [];
+
+}
+
+function getPelanggan() {
+
+    return JSON.parse(localStorage.getItem(KEY_PELANGGAN)) || [];
+
+}
+
+function getPenjualan() {
+
+    return JSON.parse(localStorage.getItem(KEY_PENJUALAN)) || [];
+
+}
+
+function getPengeluaran() {
+
+    return JSON.parse(localStorage.getItem(KEY_PENGELUARAN)) || [];
+
+}
+
+function getPiutang() {
+
+    return JSON.parse(localStorage.getItem(KEY_PIUTANG)) || [];
+
+}
+
+/*=========================================
+    SAVE DATA
+=========================================*/
+
+function saveSupplier(data) {
+
+    localStorage.setItem(KEY_SUPPLIER, JSON.stringify(data));
+
+}
+
+function saveStok(data) {
+
+    localStorage.setItem(KEY_STOK, JSON.stringify(data));
+
+}
+
+function savePelanggan(data) {
+
+    localStorage.setItem(KEY_PELANGGAN, JSON.stringify(data));
+
+}
+
+function savePenjualan(data) {
+
+    localStorage.setItem(KEY_PENJUALAN, JSON.stringify(data));
+
+}
+
+function savePengeluaran(data) {
+
+    localStorage.setItem(KEY_PENGELUARAN, JSON.stringify(data));
+
+}
+
+function savePiutang(data) {
+
+    localStorage.setItem(KEY_PIUTANG, JSON.stringify(data));
+
+}
+
+/*=========================================
+    FORMAT RUPIAH
+=========================================*/
+
+function rupiah(angka){
+
+    return Number(angka).toLocaleString("id-ID",{
+
+        style:"currency",
+
+        currency:"IDR",
+
+        minimumFractionDigits:0
+
+    });
+
+}
+
+/*=========================================
+    FORMAT ANGKA
+=========================================*/
+
+function angka(angka){
+
+    return Number(angka).toLocaleString("id-ID");
+
+}
+/*=========================================
+    TANGGAL & JAM
+=========================================*/
+
+function updateTanggalJam() {
+
+    const el = document.getElementById("tanggalJam");
+
+    if (!el) return;
+
+    const sekarang = new Date();
+
+    const opsi = {
+
+        weekday: "long",
+        day: "2-digit",
+        month: "long",
+        year: "numeric"
+
+    };
+
+    const tanggal = sekarang.toLocaleDateString("id-ID", opsi);
+
+    const jam = sekarang.toLocaleTimeString("id-ID");
+
+    el.innerHTML = `${tanggal} | ${jam}`;
+
+}
+
+setInterval(updateTanggalJam, 1000);
+
+updateTanggalJam();
+
+/*=========================================
+    DARK MODE
+=========================================*/
+
+const darkBtn = document.getElementById("darkMode");
+
+if (localStorage.getItem("darkmode") === "true") {
+
+    document.body.classList.add("dark");
+
+}
+
+if (darkBtn) {
+
+    darkBtn.addEventListener("click", () => {
+
+        document.body.classList.toggle("dark");
+
+        localStorage.setItem(
+
+            "darkmode",
+
+            document.body.classList.contains("dark")
+
+        );
+
+    });
+
+}
+
+/*=========================================
+    SIDEBAR MOBILE
+=========================================*/
+
+const menuToggle = document.getElementById("menuToggle");
+
+const sidebar = document.querySelector(".sidebar");
+
+if (menuToggle) {
+
+    menuToggle.addEventListener("click", () => {
 
         sidebar.classList.toggle("active");
 
@@ -36,186 +252,310 @@ function initSidebar() {
 
 }
 
-/*====================================
-JAM & TANGGAL
-====================================*/
+/*=========================================
+    FORMAT TANGGAL
+=========================================*/
 
-function initClock() {
+function formatTanggal(tanggal){
 
-    const target = document.getElementById("tanggalJam");
+    return new Date(tanggal).toLocaleDateString("id-ID",{
 
-    if (!target) return;
+        day:"2-digit",
 
-    setInterval(() => {
+        month:"long",
 
-        const now = new Date();
+        year:"numeric"
 
-        target.innerHTML = now.toLocaleString("id-ID", {
+    });
 
-            weekday: "long",
+}
 
-            day: "numeric",
+/*=========================================
+    GENERATE ID
+=========================================*/
 
-            month: "long",
+function generateID(){
 
-            year: "numeric",
+    return Date.now();
 
-            hour: "2-digit",
+}
 
-            minute: "2-digit",
+/*=========================================
+    NOTIFIKASI
+=========================================*/
 
-            second: "2-digit"
+function showAlert(pesan){
+
+    alert(pesan);
+
+}
+
+/*=========================================
+    KONFIRMASI
+=========================================*/
+
+function konfirmasi(pesan){
+
+    return confirm(pesan);
+
+}
+
+/*=========================================
+    PENCARIAN MENU SIDEBAR
+=========================================*/
+
+const searchInput = document.querySelector(".search-box input");
+
+if (searchInput) {
+
+    searchInput.addEventListener("keyup", function () {
+
+        const keyword = this.value.toLowerCase();
+
+        const menu = document.querySelectorAll(".menu li");
+
+        menu.forEach(item => {
+
+            const teks = item.innerText.toLowerCase();
+
+            item.style.display = teks.includes(keyword)
+
+                ? ""
+
+                : "none";
 
         });
 
-    }, 1000);
+    });
 
 }
 
-/*====================================
-DASHBOARD
-====================================*/
+/*=========================================
+    CEK HALAMAN
+=========================================*/
+
+const halaman = window.location.pathname
+    .split("/")
+    .pop()
+    .toLowerCase();
+    /*=========================================
+    DASHBOARD
+=========================================*/
 
 function loadDashboard() {
 
-    let stok = JSON.parse(localStorage.getItem("dataStok")) || [];
+    if (halaman !== "" && halaman !== "index.html") return;
 
-    let penjualan = JSON.parse(localStorage.getItem("dataPenjualan")) || [];
+    const supplier = getSupplier();
+    const stok = getStok();
+    const pelanggan = getPelanggan();
+    const penjualan = getPenjualan();
+    const pengeluaran = getPengeluaran();
+    const piutang = getPiutang();
 
-    let pengeluaran = JSON.parse(localStorage.getItem("dataPengeluaran")) || [];
+    /*=================================
+        TOTAL DATA
+    =================================*/
 
-    let piutang = JSON.parse(localStorage.getItem("dataPiutang")) || [];
+    const totalSupplier = supplier.length;
+
+    const totalPelanggan = pelanggan.length;
 
     let totalRak = 0;
+    let nilaiPersediaan = 0;
 
     stok.forEach(item => {
 
-        totalRak += Number(item.rak);
+        totalRak += Number(item.jumlahRak || 0);
+
+        nilaiPersediaan +=
+            Number(item.jumlahRak || 0) *
+            Number(item.hargaBeli || 0);
 
     });
 
-    let omzet = 0;
+    /*=================================
+        PENJUALAN HARI INI
+    =================================*/
+
+    const hariIni = new Date().toISOString().split("T")[0];
+
+    let omzetHariIni = 0;
+
+    let modalHariIni = 0;
 
     penjualan.forEach(item => {
 
-        omzet += Number(item.total);
+        if (item.tanggal === hariIni) {
+
+            omzetHariIni += Number(item.total || 0);
+
+            modalHariIni += Number(item.modal || 0);
+
+        }
 
     });
 
-    let keluar = 0;
+    /*=================================
+        PENGELUARAN HARI INI
+    =================================*/
+
+    let pengeluaranHariIni = 0;
 
     pengeluaran.forEach(item => {
 
-        keluar += Number(item.nominal);
+        if (item.tanggal === hariIni) {
+
+            pengeluaranHariIni += Number(item.nominal || 0);
+
+        }
 
     });
 
-    let hutang = 0;
+    /*=================================
+        PIUTANG
+    =================================*/
+
+    let totalPiutang = 0;
 
     piutang.forEach(item => {
 
-        hutang += Number(item.nominal);
+        if (item.status !== "Lunas") {
+
+            totalPiutang += Number(item.nominal || 0);
+
+        }
 
     });
 
-    setText("totalStok", totalRak + " Rak");
+    /*=================================
+        LABA
+    =================================*/
 
-    setText("ringkasanRak", totalRak);
+    const labaBersih =
+        omzetHariIni -
+        modalHariIni -
+        pengeluaranHariIni;
 
-    setText("penjualanHariIni", rupiah(omzet));
+    /*=================================
+        TAMPILKAN KE DASHBOARD
+    =================================*/
 
-    setText("ringkasanJual", rupiah(omzet));
+    document.getElementById("totalSupplier").textContent =
+        angka(totalSupplier);
 
-    setText("pengeluaranHariIni", rupiah(keluar));
+    document.getElementById("totalPelanggan").textContent =
+        angka(totalPelanggan);
 
-    setText("ringkasanKeluar", rupiah(keluar));
+    document.getElementById("totalRak").textContent =
+        angka(totalRak) + " Rak";
 
-    setText("piutangTotal", rupiah(hutang));
+    document.getElementById("nilaiPersediaan").textContent =
+        rupiah(nilaiPersediaan);
 
-    setText("ringkasanPiutang", rupiah(hutang));
+    document.getElementById("penjualanHari").textContent =
+        rupiah(omzetHariIni);
 
-    setText("ringkasanLaba", rupiah(omzet - keluar));
+    document.getElementById("pengeluaranHari").textContent =
+        rupiah(pengeluaranHariIni);
+
+    document.getElementById("labaBersih").textContent =
+        rupiah(labaBersih);
+
+    document.getElementById("totalPiutang").textContent =
+        rupiah(totalPiutang);
+
+    /*=================================
+        RINGKASAN
+    =================================*/
+
+    document.getElementById("sumSupplier").textContent =
+        angka(totalSupplier);
+
+    document.getElementById("sumPelanggan").textContent =
+        angka(totalPelanggan);
+
+    document.getElementById("sumRak").textContent =
+        angka(totalRak);
+
+    document.getElementById("sumPenjualan").textContent =
+        rupiah(omzetHariIni);
+
+    document.getElementById("sumPengeluaran").textContent =
+        rupiah(pengeluaranHariIni);
+
+    document.getElementById("sumLaba").textContent =
+        rupiah(labaBersih);
 
 }
 
-/*====================================
-HELPER
-====================================*/
+loadDashboard();
+/*=========================================
+    GRAFIK DASHBOARD
+=========================================*/
 
-function setText(id, value) {
+function loadCharts() {
 
-    const el = document.getElementById(id);
+    if (halaman !== "" && halaman !== "index.html") return;
 
-    if (el) {
+    const penjualan = getPenjualan();
+    const stok = getStok();
 
-        el.innerHTML = value;
+    /*=================================
+        GRAFIK PENJUALAN 7 HARI
+    =================================*/
+
+    const labelHari = [];
+    const dataPenjualan = [];
+
+    for (let i = 6; i >= 0; i--) {
+
+        const tanggal = new Date();
+
+        tanggal.setDate(tanggal.getDate() - i);
+
+        const key = tanggal.toISOString().split("T")[0];
+
+        labelHari.push(
+            tanggal.toLocaleDateString("id-ID", {
+                day: "2-digit",
+                month: "short"
+            })
+        );
+
+        let total = 0;
+
+        penjualan.forEach(item => {
+
+            if (item.tanggal === key) {
+
+                total += Number(item.total || 0);
+
+            }
+
+        });
+
+        dataPenjualan.push(total);
 
     }
 
-}
+    const chartPenjualan = document.getElementById("chartPenjualan");
 
-function rupiah(angka) {
+    if (chartPenjualan) {
 
-    return "Rp " + Number(angka).toLocaleString("id-ID");
+        new Chart(chartPenjualan, {
 
-}
-/*====================================
-CHART.JS
-====================================*/
+            type: "line",
 
-function initChart() {
+            data: {
 
-    const canvas = document.getElementById("salesChart");
+                labels: labelHari,
 
-    if (!canvas) return;
-
-    new Chart(canvas, {
-
-        type: "line",
-
-        data: {
-
-            labels: [
-
-                "Sen",
-
-                "Sel",
-
-                "Rab",
-
-                "Kam",
-
-                "Jum",
-
-                "Sab",
-
-                "Min"
-
-            ],
-
-            datasets: [
-
-                {
+                datasets: [{
 
                     label: "Penjualan",
 
-                    data: [
-
-                        0,
-
-                        0,
-
-                        0,
-
-                        0,
-
-                        0,
-
-                        0,
-
-                        0
-
-                    ],
+                    data: dataPenjualan,
 
                     borderColor: "#f59e0b",
 
@@ -223,53 +563,19 @@ function initChart() {
 
                     fill: true,
 
-                    tension: .4,
+                    tension: .35
 
-                    borderWidth: 3,
-
-                    pointRadius: 5,
-
-                    pointBackgroundColor: "#f59e0b"
-
-                }
-
-            ]
-
-        },
-
-        options: {
-
-            responsive: true,
-
-            maintainAspectRatio: false,
-
-            plugins: {
-
-                legend: {
-
-                    display: false
-
-                }
+                }]
 
             },
 
-            scales: {
+            options: {
 
-                y: {
+                responsive: true,
 
-                    beginAtZero: true,
+                plugins: {
 
-                    grid: {
-
-                        color: "#eeeeee"
-
-                    }
-
-                },
-
-                x: {
-
-                    grid: {
+                    legend: {
 
                         display: false
 
@@ -279,446 +585,767 @@ function initChart() {
 
             }
 
+        });
+
+    }
+
+    /*=================================
+        GRAFIK STOK
+    =================================*/
+
+    const supplier = [];
+    const jumlah = [];
+
+    stok.forEach(item => {
+
+        supplier.push(item.supplier);
+
+        jumlah.push(Number(item.jumlahRak || 0));
+
+    });
+
+    const chartStok = document.getElementById("chartStok");
+
+    if (chartStok) {
+
+        new Chart(chartStok, {
+
+            type: "doughnut",
+
+            data: {
+
+                labels: supplier,
+
+                datasets: [{
+
+                    data: jumlah,
+
+                    backgroundColor: [
+
+                        "#f59e0b",
+
+                        "#10b981",
+
+                        "#3b82f6",
+
+                        "#ef4444",
+
+                        "#8b5cf6",
+
+                        "#06b6d4",
+
+                        "#22c55e",
+
+                        "#f97316"
+
+                    ]
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                plugins: {
+
+                    legend: {
+
+                        position: "bottom"
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    }
+
+}
+
+loadCharts();
+
+/*=========================================
+    TOP SUPPLIER
+=========================================*/
+
+function loadTopSupplier() {
+
+    if (halaman !== "" && halaman !== "index.html") return;
+
+    const tbody = document.getElementById("topSupplier");
+
+    if (!tbody) return;
+
+    const stok = getStok();
+
+    tbody.innerHTML = "";
+
+    if (stok.length === 0) {
+
+        tbody.innerHTML = `
+        <tr>
+            <td colspan="2" class="text-center">
+                Belum ada data
+            </td>
+        </tr>`;
+
+        return;
+
+    }
+
+    stok.sort((a, b) => b.jumlahRak - a.jumlahRak);
+
+    stok.slice(0, 5).forEach(item => {
+
+        tbody.innerHTML += `
+
+        <tr>
+
+            <td>${item.supplier}</td>
+
+            <td>${angka(item.jumlahRak)} Rak</td>
+
+        </tr>
+
+        `;
+
+    });
+
+}
+
+loadTopSupplier();
+/*=========================================
+    GRAFIK DASHBOARD
+=========================================*/
+
+function loadCharts() {
+
+    if (halaman !== "" && halaman !== "index.html") return;
+
+    const penjualan = getPenjualan();
+    const stok = getStok();
+
+    /*=================================
+        GRAFIK PENJUALAN 7 HARI
+    =================================*/
+
+    const labelHari = [];
+    const dataPenjualan = [];
+
+    for (let i = 6; i >= 0; i--) {
+
+        const tanggal = new Date();
+
+        tanggal.setDate(tanggal.getDate() - i);
+
+        const key = tanggal.toISOString().split("T")[0];
+
+        labelHari.push(
+            tanggal.toLocaleDateString("id-ID", {
+                day: "2-digit",
+                month: "short"
+            })
+        );
+
+        let total = 0;
+
+        penjualan.forEach(item => {
+
+            if (item.tanggal === key) {
+
+                total += Number(item.total || 0);
+
+            }
+
+        });
+
+        dataPenjualan.push(total);
+
+    }
+
+    const chartPenjualan = document.getElementById("chartPenjualan");
+
+    if (chartPenjualan) {
+
+        new Chart(chartPenjualan, {
+
+            type: "line",
+
+            data: {
+
+                labels: labelHari,
+
+                datasets: [{
+
+                    label: "Penjualan",
+
+                    data: dataPenjualan,
+
+                    borderColor: "#f59e0b",
+
+                    backgroundColor: "rgba(245,158,11,.15)",
+
+                    fill: true,
+
+                    tension: .35
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                plugins: {
+
+                    legend: {
+
+                        display: false
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    }
+
+    /*=================================
+        GRAFIK STOK
+    =================================*/
+
+    const supplier = [];
+    const jumlah = [];
+
+    stok.forEach(item => {
+
+        supplier.push(item.supplier);
+
+        jumlah.push(Number(item.jumlahRak || 0));
+
+    });
+
+    const chartStok = document.getElementById("chartStok");
+
+    if (chartStok) {
+
+        new Chart(chartStok, {
+
+            type: "doughnut",
+
+            data: {
+
+                labels: supplier,
+
+                datasets: [{
+
+                    data: jumlah,
+
+                    backgroundColor: [
+
+                        "#f59e0b",
+
+                        "#10b981",
+
+                        "#3b82f6",
+
+                        "#ef4444",
+
+                        "#8b5cf6",
+
+                        "#06b6d4",
+
+                        "#22c55e",
+
+                        "#f97316"
+
+                    ]
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                plugins: {
+
+                    legend: {
+
+                        position: "bottom"
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    }
+
+}
+
+loadCharts();
+
+/*=========================================
+    TOP SUPPLIER
+=========================================*/
+
+function loadTopSupplier() {
+
+    if (halaman !== "" && halaman !== "index.html") return;
+
+    const tbody = document.getElementById("topSupplier");
+
+    if (!tbody) return;
+
+    const stok = getStok();
+
+    tbody.innerHTML = "";
+
+    if (stok.length === 0) {
+
+        tbody.innerHTML = `
+        <tr>
+            <td colspan="2" class="text-center">
+                Belum ada data
+            </td>
+        </tr>`;
+
+        return;
+
+    }
+
+    stok.sort((a, b) => b.jumlahRak - a.jumlahRak);
+
+    stok.slice(0, 5).forEach(item => {
+
+        tbody.innerHTML += `
+
+        <tr>
+
+            <td>${item.supplier}</td>
+
+            <td>${angka(item.jumlahRak)} Rak</td>
+
+        </tr>
+
+        `;
+
+    });
+
+}
+
+loadTopSupplier();
+/*=========================================
+    TOP PELANGGAN
+=========================================*/
+
+function loadTopPelanggan() {
+
+    if (halaman !== "" && halaman !== "index.html") return;
+
+    const tbody = document.getElementById("topPelanggan");
+
+    if (!tbody) return;
+
+    const penjualan = getPenjualan();
+
+    tbody.innerHTML = "";
+
+    if (penjualan.length === 0) {
+
+        tbody.innerHTML = `
+        <tr>
+            <td colspan="2" class="text-center">
+                Belum ada data
+            </td>
+        </tr>`;
+
+        return;
+
+    }
+
+    const data = {};
+
+    penjualan.forEach(item => {
+
+        if (!data[item.pelanggan]) {
+
+            data[item.pelanggan] = 0;
+
         }
 
+        data[item.pelanggan] += Number(item.total || 0);
+
+    });
+
+    const hasil = Object.entries(data)
+        .sort((a,b)=>b[1]-a[1])
+        .slice(0,5);
+
+    hasil.forEach(item=>{
+
+        tbody.innerHTML += `
+
+        <tr>
+
+            <td>${item[0]}</td>
+
+            <td>${rupiah(item[1])}</td>
+
+        </tr>
+
+        `;
+
     });
 
 }
 
-/*====================================
-DARK MODE
-====================================*/
+loadTopPelanggan();
 
-function initDarkMode() {
+/*=========================================
+    STATUS PERSEDIAAN
+=========================================*/
 
-    const tombol = document.getElementById("darkMode");
+function loadStatusPersediaan(){
 
-    if (!tombol) return;
+    if (halaman !== "" && halaman !== "index.html") return;
 
-    if (localStorage.getItem("theme") === "dark") {
+    const tbody=document.getElementById("statusPersediaan");
 
-        document.body.classList.add("dark");
+    if(!tbody) return;
+
+    const stok=getStok();
+
+    tbody.innerHTML="";
+
+    if(stok.length===0){
+
+        tbody.innerHTML=`
+
+        <tr>
+
+        <td colspan="4" class="text-center">
+
+        Belum ada data stok
+
+        </td>
+
+        </tr>
+
+        `;
+
+        return;
 
     }
 
-    tombol.addEventListener("click", () => {
+    stok.forEach(item=>{
 
-        document.body.classList.toggle("dark");
+        const nilai=
+        Number(item.jumlahRak||0)*
+        Number(item.hargaBeli||0);
 
-        if (document.body.classList.contains("dark")) {
+        tbody.innerHTML+=`
 
-            localStorage.setItem("theme", "dark");
+        <tr>
 
-        } else {
+        <td>${item.supplier}</td>
 
-            localStorage.setItem("theme", "light");
+        <td>${angka(item.jumlahRak)} Rak</td>
 
-        }
+        <td>${rupiah(item.hargaBeli)}</td>
 
-    });
+        <td>${rupiah(nilai)}</td>
 
-}
+        </tr>
 
-/*====================================
-LOADING
-====================================*/
-
-window.addEventListener("load", () => {
-
-    const loader = document.querySelector(".loader");
-
-    if (!loader) return;
-
-    setTimeout(() => {
-
-        loader.classList.add("hidden");
-
-    }, 600);
-
-});
-
-/*====================================
-NOTIFIKASI
-====================================*/
-
-function showToast(pesan) {
-
-    const toast = document.createElement("div");
-
-    toast.innerHTML = pesan;
-
-    toast.style.position = "fixed";
-
-    toast.style.top = "20px";
-
-    toast.style.right = "20px";
-
-    toast.style.background = "#10b981";
-
-    toast.style.color = "#fff";
-
-    toast.style.padding = "12px 18px";
-
-    toast.style.borderRadius = "12px";
-
-    toast.style.boxShadow = "0 10px 20px rgba(0,0,0,.15)";
-
-    toast.style.zIndex = "99999";
-
-    document.body.appendChild(toast);
-
-    setTimeout(() => {
-
-        toast.remove();
-
-    }, 3000);
-
-}
-/*====================================
-AUTO REFRESH DASHBOARD
-====================================*/
-
-function refreshDashboard() {
-
-    loadDashboard();
-
-}
-
-window.addEventListener("storage", refreshDashboard);
-
-setInterval(refreshDashboard, 5000);
-
-/*====================================
-DATA STOK
-====================================*/
-
-function getTotalStok() {
-
-    let data = JSON.parse(localStorage.getItem("dataStok")) || [];
-
-    let total = 0;
-
-    data.forEach(item => {
-
-        total += Number(item.rak);
+        `;
 
     });
 
-    return total;
-
 }
 
-/*====================================
-DATA PENJUALAN
-====================================*/
+loadStatusPersediaan();
 
-function getTotalPenjualan() {
+/*=========================================
+    AKTIVITAS TERAKHIR
+=========================================*/
 
-    let data = JSON.parse(localStorage.getItem("dataPenjualan")) || [];
+function loadAktivitas(){
 
-    let total = 0;
+    if (halaman !== "" && halaman !== "index.html") return;
 
-    data.forEach(item => {
+    const tbody=document.getElementById("aktivitasTerakhir");
 
-        total += Number(item.total);
+    if(!tbody) return;
 
-    });
+    tbody.innerHTML="";
 
-    return total;
+    const aktivitas=[];
 
-}
+    getSupplier().forEach(item=>{
 
-/*====================================
-DATA PENGELUARAN
-====================================*/
+        aktivitas.push({
 
-function getTotalPengeluaran() {
+            waktu:item.tanggal||"-",
 
-    let data = JSON.parse(localStorage.getItem("dataPengeluaran")) || [];
+            teks:"Supplier ditambahkan",
 
-    let total = 0;
-
-    data.forEach(item => {
-
-        total += Number(item.nominal);
-
-    });
-
-    return total;
-
-}
-
-/*====================================
-DATA PIUTANG
-====================================*/
-
-function getTotalPiutang() {
-
-    let data = JSON.parse(localStorage.getItem("dataPiutang")) || [];
-
-    let total = 0;
-
-    data.forEach(item => {
-
-        total += Number(item.nominal);
-
-    });
-
-    return total;
-
-}
-
-/*====================================
-UPDATE RINGKASAN
-====================================*/
-
-function updateRingkasan() {
-
-    let stok = getTotalStok();
-
-    let jual = getTotalPenjualan();
-
-    let keluar = getTotalPengeluaran();
-
-    let piutang = getTotalPiutang();
-
-    let laba = jual - keluar;
-
-    setText("totalStok", stok + " Rak");
-
-    setText("ringkasanRak", stok);
-
-    setText("penjualanHariIni", rupiah(jual));
-
-    setText("ringkasanJual", rupiah(jual));
-
-    setText("pengeluaranHariIni", rupiah(keluar));
-
-    setText("ringkasanKeluar", rupiah(keluar));
-
-    setText("piutangTotal", rupiah(piutang));
-
-    setText("ringkasanPiutang", rupiah(piutang));
-
-    setText("ringkasanLaba", rupiah(laba));
-
-}
-
-updateRingkasan();
-
-/*====================================
-SALAM
-====================================*/
-
-function tampilSalam(){
-
-    const jam = new Date().getHours();
-
-    let salam = "";
-
-    if(jam < 12){
-
-        salam = "Selamat Pagi ☀️";
-
-    }else if(jam < 15){
-
-        salam = "Selamat Siang 🌤️";
-
-    }else if(jam < 18){
-
-        salam = "Selamat Sore 🌥️";
-
-    }else{
-
-        salam = "Selamat Malam 🌙";
-
-    }
-
-    const judul = document.querySelector(".left h2");
-
-    if(judul){
-
-        judul.innerHTML = salam;
-
-    }
-
-}
-
-tampilSalam();
-/*====================================
-MENU SEARCH
-====================================*/
-
-const searchInput = document.querySelector(".search input");
-
-if (searchInput) {
-
-    searchInput.addEventListener("keyup", function () {
-
-        const keyword = this.value.toLowerCase();
-
-        document.querySelectorAll(".sidebar li").forEach(li => {
-
-            li.style.display = li.innerText.toLowerCase().includes(keyword)
-                ? ""
-                : "none";
+            status:"Supplier"
 
         });
 
     });
 
-}
+    getPenjualan().forEach(item=>{
 
-/*====================================
-NOTIFIKASI STOK MENIPIS
-====================================*/
+        aktivitas.push({
 
-function cekStokMenipis() {
+            waktu:item.tanggal,
 
-    const stok = JSON.parse(localStorage.getItem("dataStok")) || [];
+            teks:"Penjualan berhasil",
 
-    let total = 0;
+            status:"Penjualan"
 
-    stok.forEach(item => {
-
-        total += Number(item.rak);
+        });
 
     });
 
-    if (total <= 10) {
+    getPengeluaran().forEach(item=>{
 
-        showToast("⚠️ Peringatan! Stok telur tinggal " + total + " rak");
+        aktivitas.push({
+
+            waktu:item.tanggal,
+
+            teks:"Pengeluaran dicatat",
+
+            status:"Pengeluaran"
+
+        });
+
+    });
+
+    aktivitas.sort((a,b)=>
+
+        new Date(b.waktu)-new Date(a.waktu)
+
+    );
+
+    aktivitas.slice(0,10).forEach(item=>{
+
+        tbody.innerHTML+=`
+
+        <tr>
+
+            <td>${item.waktu}</td>
+
+            <td>${item.teks}</td>
+
+            <td>
+
+                <span class="badge-success">
+
+                    ${item.status}
+
+                </span>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+    if(aktivitas.length===0){
+
+        tbody.innerHTML=`
+
+        <tr>
+
+            <td colspan="3"
+
+            class="text-center">
+
+            Belum ada aktivitas
+
+            </td>
+
+        </tr>
+
+        `;
 
     }
 
 }
 
-cekStokMenipis();
+loadAktivitas();
 
-/*====================================
-EXPORT DATA
-====================================*/
+/*=========================================
+    REFRESH DASHBOARD
+=========================================*/
 
-function exportData() {
+function refreshDashboard(){
 
-    const data = {
+    loadDashboard();
 
-        stok: JSON.parse(localStorage.getItem("dataStok")) || [],
+    loadCharts();
 
-        penjualan: JSON.parse(localStorage.getItem("dataPenjualan")) || [],
+    loadTopSupplier();
 
-        supplier: JSON.parse(localStorage.getItem("dataSupplier")) || [],
+    loadTopPelanggan();
 
-        pengeluaran: JSON.parse(localStorage.getItem("dataPengeluaran")) || [],
+    loadStatusPersediaan();
 
-        piutang: JSON.parse(localStorage.getItem("dataPiutang")) || []
+    loadAktivitas();
 
-    };
+}
+/*=========================================
+    AUTO REFRESH ANTAR TAB
+=========================================*/
 
-    const blob = new Blob(
+window.addEventListener("storage", function (event) {
 
-        [JSON.stringify(data, null, 2)],
+    const keys = [
+        KEY_SUPPLIER,
+        KEY_STOK,
+        KEY_PELANGGAN,
+        KEY_PENJUALAN,
+        KEY_PENGELUARAN,
+        KEY_PIUTANG
+    ];
 
-        { type: "application/json" }
+    if (keys.includes(event.key)) {
 
-    );
+        refreshDashboard();
 
-    const a = document.createElement("a");
+    }
 
-    a.href = URL.createObjectURL(blob);
+});
 
-    a.download = "TelurKita_Backup.json";
+/*=========================================
+    RESET DATA (DEVELOPER)
+=========================================*/
 
-    a.click();
+function resetSemuaData() {
+
+    if (!konfirmasi("Yakin ingin menghapus semua data?")) {
+
+        return;
+
+    }
+
+    localStorage.removeItem(KEY_SUPPLIER);
+    localStorage.removeItem(KEY_STOK);
+    localStorage.removeItem(KEY_PELANGGAN);
+    localStorage.removeItem(KEY_PENJUALAN);
+    localStorage.removeItem(KEY_PENGELUARAN);
+    localStorage.removeItem(KEY_PIUTANG);
+
+    initStorage();
+
+    showAlert("Semua data berhasil dihapus.");
+
+    location.reload();
 
 }
 
-/*====================================
-IMPORT DATA
-====================================*/
+/*=========================================
+    HITUNG LABA
+=========================================*/
 
-function importData(input) {
+function hitungLaba(totalJual, totalModal) {
 
-    const file = input.files[0];
-
-    if (!file) return;
-
-    const reader = new FileReader();
-
-    reader.onload = function (e) {
-
-        const data = JSON.parse(e.target.result);
-
-        localStorage.setItem("dataStok", JSON.stringify(data.stok || []));
-
-        localStorage.setItem("dataPenjualan", JSON.stringify(data.penjualan || []));
-
-        localStorage.setItem("dataSupplier", JSON.stringify(data.supplier || []));
-
-        localStorage.setItem("dataPengeluaran", JSON.stringify(data.pengeluaran || []));
-
-        localStorage.setItem("dataPiutang", JSON.stringify(data.piutang || []));
-
-        showToast("✅ Data berhasil dipulihkan");
-
-        setTimeout(() => {
-
-            location.reload();
-
-        }, 1000);
-
-    };
-
-    reader.readAsText(file);
+    return Number(totalJual) - Number(totalModal);
 
 }
 
-/*====================================
-HAPUS SEMUA DATA
-====================================*/
+/*=========================================
+    HITUNG NILAI STOK
+=========================================*/
 
-function resetData() {
+function hitungNilaiStok(jumlahRak, hargaBeli) {
 
-    if (!confirm("Yakin ingin menghapus seluruh data?")) return;
-
-    localStorage.clear();
-
-    showToast("🗑️ Semua data berhasil dihapus");
-
-    setTimeout(() => {
-
-        location.reload();
-
-    }, 1000);
+    return Number(jumlahRak) * Number(hargaBeli);
 
 }
 
-/*====================================
-LOGOUT
-====================================*/
+/*=========================================
+    CEK STOK SUPPLIER
+=========================================*/
 
-function logout() {
+function cariSupplierStok(namaSupplier) {
 
-    if (!confirm("Keluar dari aplikasi?")) return;
+    const stok = getStok();
 
-    showToast("👋 Sampai jumpa!");
-
-    setTimeout(() => {
-
-        location.href = "index.html";
-
-    }, 1000);
+    return stok.find(item => item.supplier === namaSupplier);
 
 }
 
-/*====================================
-VERSI
-====================================*/
+/*=========================================
+    UPDATE STOK SETELAH PENJUALAN
+=========================================*/
 
-console.log(
-"%cTelurKita Premium V2",
-"background:#f59e0b;color:white;padding:8px 12px;border-radius:6px;font-weight:bold;"
-);
+function kurangiStokSupplier(namaSupplier, jumlahRak) {
 
-console.log("Versi : 2.0.0");
-console.log("Developer : Wahyudi & ChatGPT");
+    const stok = getStok();
+
+    const index = stok.findIndex(item => item.supplier === namaSupplier);
+
+    if (index === -1) {
+
+        return false;
+
+    }
+
+    const sisa = Number(stok[index].jumlahRak) - Number(jumlahRak);
+
+    if (sisa < 0) {
+
+        showAlert("Stok rak tidak mencukupi.");
+
+        return false;
+
+    }
+
+    stok[index].jumlahRak = sisa;
+
+    saveStok(stok);
+
+    return true;
+
+}
+
+/*=========================================
+    INIT APP
+=========================================*/
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    try {
+
+        refreshDashboard();
+
+    } catch (e) {
+
+        console.log("Dashboard tidak dimuat pada halaman ini.");
+
+    }
+
+});
+
+/*=========================================
+    END OF FILE
+=========================================*/
+
+console.log("✅ TelurKita Premium V3 Loaded");
